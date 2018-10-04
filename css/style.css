@@ -1,0 +1,14 @@
+body{
+	background-color: #eeeeee;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+ }
+ 
+ h1 {
+	background-color: #eeeeee; 
+	color: #ff0000;
+	text-align: center;
+	text-shadow: 3px 2px #808080;
+ }
