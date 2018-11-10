@@ -1,0 +1,28 @@
+
+
+body{
+	background-color: #ff0000;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+ }
+ 
+section{
+		background-color:green;
+		
+}
+#menu{
+	background-color: grey;
+	width: 75%;
+}
+
+#section2{
+	background-color: white;
+	width: 25%;
+}
+
+.sectionc{
+	
+	font-size:20px;
+}
