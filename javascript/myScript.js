@@ -104,8 +104,8 @@ function getCanvasCTX(id)
 	console.log('doCanvasStuff fired');
 	canvas = document.getElementById(id);
 	var myContext = canvas.getContext('2d');
-	canvas.width = window.innerWidth - 20;
-	canvas.height = window.innerHeight - 20;
+	canvas.width = window.innerWidth - 50;
+	canvas.height = window.innerHeight - 50;
 	return (myContext);
 }
 
