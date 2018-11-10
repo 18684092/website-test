@@ -122,7 +122,7 @@ function canvasResize()
 function clearScreen()
 {
 	ctx.fillStyle = background;
-	ctx.fillRect(0,0,500,500);
+	ctx.fillRect(0,0,canvas.width, canvas.height);
 }
 
 
