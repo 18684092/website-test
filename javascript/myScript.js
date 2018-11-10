@@ -86,13 +86,14 @@ function getCanvasCTX(id)
 	canvas = document.getElementById(id);
 	var myContext = canvas.getContext('2d');
 	canvas.width = window.innerWidth - 50;
-	canvas.height = 500;
+	canvas.height = window.innerHeight - 200;
 	return (myContext);
 }
 
 function canvasResize()
 {
 	canvas.width = window.innerWidth - 50;
+	canvas.height = window.innerHeight - 200;
 }
 function clearScreen()
 {
