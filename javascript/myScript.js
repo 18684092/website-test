@@ -68,7 +68,7 @@ function uniCharCode(event)
 		spaceInvader.scale = 1;
 	}	
 	if (c == 97)
-			spaceInvader.speed += 1;
+		spaceInvader.speed += 1;
 	if (spaceInvader.speed >= 32)
 		spaceInvader.speed = 1;
 }
@@ -94,11 +94,9 @@ function clearScreen()
 // Draw stuff
 function Draw(ctx)
 {
-	
 	ClearObject(spaceInvader, ctx);
 	DrawObject(spaceInvader, ctx);
 	MoveObject(spaceInvader, ctx);
-	
 }
 
 
@@ -158,6 +156,7 @@ function ClearObject(object, ctx)
 {
 	ctx.fillStyle = background;
 	ctx.fillRect(object.oldX, object.oldY, object.scale * object.oldPicture[0].length , object.scale * object.oldPicture.length );
+	ctx.stroke;
 }
 
 
