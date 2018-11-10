@@ -50,6 +50,7 @@ function init(width, height)
 {
 	console.log('Init fired');
 	ctx = getCanvasCTX("canvas")
+	setScale();
 	var intervalDraw = setInterval(Draw, 30, ctx);
 	var intervalAnimate = setInterval(Animate, 500, ctx);
 }
@@ -57,6 +58,26 @@ function init(width, height)
 ///////////////
 // Functions //
 ///////////////
+
+function setScale()
+{
+	spaceInvader.scale = 1;
+	if (canvas.width > 200)
+		spaceInvader.scale = 2;
+	if (canvas.width > 300)
+		spaceInvader.scale = 4;
+	if (canvas.width > 400)
+		spaceInvader.scale = 6;
+	if (canvas.width > 600)
+		spaceInvader.scale = 8;
+	if (canvas.width > 800)
+		spaceInvader.scale = 10;
+	if (canvas.width > 1000)
+		spaceInvader.scale = 12;
+	if (canvas.width > 1200
+		spaceInvader.scale = 14;
+	
+}
 
 function uniCharCode(event) 
 {
@@ -92,6 +113,7 @@ function getCanvasCTX(id)
 
 function canvasResize()
 {
+	setScale();
 	canvas.width = window.innerWidth - 50;
 	canvas.height = window.innerHeight - 200;
 	if (spaceInvader.x + spaceInvader.picture[0].length * spaceInvader.scale >= canvas.width)
