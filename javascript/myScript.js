@@ -73,7 +73,7 @@ function uniCharCode(event)
 		spaceInvader.speed = 1;
 	if (c == 99)
 		if (spaceInvader.colour == "red")
-			spaceInvader.colour == "white";
+			spaceInvader.colour = "white";
 		else
 			spaceInvader.colour = "red";
 }
