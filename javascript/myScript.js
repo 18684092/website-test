@@ -113,9 +113,9 @@ function getCanvasCTX(id)
 
 function canvasResize()
 {
-	setScale();
 	canvas.width = window.innerWidth - 50;
 	canvas.height = window.innerHeight - 200;
+	setScale();
 	if (spaceInvader.x + spaceInvader.picture[0].length * spaceInvader.scale >= canvas.width)
 	{
 	spaceInvader.x = canvas.width - spaceInvader.picture[0].length * spaceInvader.scale - 20;
