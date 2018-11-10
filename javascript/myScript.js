@@ -59,28 +59,24 @@ function init(width, height)
 // Functions //
 ///////////////
 
+// Red do this function!!!
 function setScale()
 {
 	spaceInvader.scale = 1;
-	if (canvas.width > 200)
+	if (canvas.width >= 400)
 		spaceInvader.scale = 2;
-	if (canvas.width > 300)
-		spaceInvader.scale = 2;
-	if (canvas.width > 400)
-		spaceInvader.scale = 2;
-	if (canvas.width > 600)
-		spaceInvader.scale = 2;
-	if (canvas.width > 800)
+	if (canvas.width >= 800)
 		spaceInvader.scale = 4;
-	if (canvas.width > 1000)
+	if (canvas.width >= 1000)
 		spaceInvader.scale = 6;
-	if (canvas.width > 1200)
+	if (canvas.width >= 1200)
 		spaceInvader.scale = 8;
-		if (canvas.width > 1600)
+	if (canvas.width >= 1600)
 		spaceInvader.scale = 10;
-	console.log("set scale "  + canvas.width);
 }
 
+
+// Code thrown together to test
 function uniCharCode(event) 
 {
     var c = event.which || event.keyCode;
@@ -120,7 +116,7 @@ function canvasResize()
 	setScale();
 	if (spaceInvader.x + spaceInvader.picture[0].length * spaceInvader.scale >= canvas.width)
 	{
-	spaceInvader.x = canvas.width - spaceInvader.picture[0].length * spaceInvader.scale - 20;
+	spaceInvader.x = canvas.width - spaceInvader.picture[0].length * spaceInvader.scale - 40;
 	}
 }
 function clearScreen()
