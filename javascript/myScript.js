@@ -76,7 +76,7 @@ function setScale()
 		spaceInvader.scale = 8;
 	if (canvas.width > 1200)
 		spaceInvader.scale = 10;
-	console.log("set scale  + canvas.width);
+	console.log("set scale "  + canvas.width);
 }
 
 function uniCharCode(event) 
