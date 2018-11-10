@@ -22,15 +22,15 @@ var spaceInvaderImage0 = [
 var spaceInvader = {
 	x : 10,
 	y : 20,
-	colour : "red",
+	colour : "white",
 	picture : spaceInvaderImage1,
 	oldPicture: spaceInvaderImage0,
 	state : 1,
 	hit : 0,
 	oldX : 0,
 	oldY : 20,
-	scale : 4,
-	speed : 4,
+	scale : 2,
+	speed : 2,
 	direction : 1
 }
 
