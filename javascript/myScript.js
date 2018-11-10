@@ -65,9 +65,9 @@ function setScale()
 	spaceInvader.scale = 1;
 	if (canvas.width >= 600)
 		spaceInvader.scale = 2;
-	if (canvas.width >= 900)
+	if (canvas.width >= 1025)
 		spaceInvader.scale = 4;
-	if (canvas.width >= 1400)
+	if (canvas.width >= 1500)
 		spaceInvader.scale = 6;
 	if (canvas.width >= 2000)
 		spaceInvader.scale = 8;
