@@ -36,6 +36,7 @@ var spaceInvader = {
 
 var background = "blue";
 var ctx;
+var canvas;
 
 window.onload = function()
 {
@@ -49,7 +50,7 @@ function init(width, height)
 {
 	console.log('Init fired');
 	ctx = getCanvasCTX("canvas")
-	var intervalDraw = setInterval(Draw, 60, ctx);
+	var intervalDraw = setInterval(Draw, 30, ctx);
 	var intervalAnimate = setInterval(Animate, 500, ctx);
 }
 
@@ -82,13 +83,17 @@ function uniCharCode(event)
 function getCanvasCTX(id)
 {
 	console.log('doCanvasStuff fired');
-	var canvas = document.getElementById(id);
+	canvas = document.getElementById(id);
 	var myContext = canvas.getContext('2d');
-	canvas.width = 500;
+	canvas.width = window.innerWidth;
 	canvas.height = 500;
 	return (myContext);
 }
 
+function canvasResize()
+{
+	canvas.width = window.innerWidth;
+}
 function clearScreen()
 {
 	ctx.fillStyle = background;
@@ -150,7 +155,7 @@ function MoveObject(object, ctx)
 {
 	// save old position
 	object.oldX = object.x;
-	if (object.x + object.speed + object.picture.length * object.scale >= 500 || object.x <= Math.abs(object.speed))
+	if (object.x + object.speed + object.picture.length * object.scale >= canvas.width || object.x <= Math.abs(object.speed))
 	{
 		object.direction *= -1;
 	}
