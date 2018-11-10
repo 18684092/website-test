@@ -105,14 +105,14 @@ function getCanvasCTX(id)
 	canvas = document.getElementById(id);
 	var myContext = canvas.getContext('2d');
 	canvas.width = window.innerWidth - 50;
-	canvas.height = window.innerHeight - 50;
+	canvas.height = window.innerHeight - 100;
 	return (myContext);
 }
 
 function canvasResize()
 {
 	canvas.width = window.innerWidth - 50;
-	canvas.height = window.innerHeight - 50;
+	canvas.height = window.innerHeight - 100;
 	setScale();
 	if (spaceInvader.x + spaceInvader.picture[0].length * spaceInvader.scale >= canvas.width)
 	{
