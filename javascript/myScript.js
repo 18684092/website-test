@@ -71,6 +71,11 @@ function uniCharCode(event)
 		spaceInvader.speed += 1;
 	if (spaceInvader.speed >= 32)
 		spaceInvader.speed = 1;
+	if (c == 99)
+		if (spaceInvader.colour == "red")
+			spaceInvader.colour == "white";
+		else
+			spaceInvader.colour = "red";
 }
 
 // Get 2d canvas context - return ctx
@@ -123,6 +128,7 @@ function AnimateSpaceInvader(object, ctx)
 		object.oldPicture = spaceInvaderImage0
 	}
 }
+
 // draw object, any object, at present one colour, will change to multi colour
 function DrawObject(object, ctx)
 {
@@ -151,6 +157,7 @@ function MoveObject(object, ctx)
 	object.x += object.speed * object.direction;
 	
 }
+
 // clear object
 function ClearObject(object, ctx)
 {
