@@ -7,5 +7,7 @@ body{
  }
  
  #canvas {
-	 background-color: #0000ff;
+	background-color: #0000ff;
+	margin: 0;
+	padding: 0;
  }
