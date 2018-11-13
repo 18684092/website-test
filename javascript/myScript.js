@@ -100,7 +100,7 @@ function getCanvasCTX(id)
 function canvasResize()
 {
 	canvas.width = window.innerWidth - 50;
-	canvas.height = window.innerHeight - 100;
+	canvas.height = window.innerHeight - 50;
 	setScale();
 	var change = false;
 	var amount = 0;
@@ -115,8 +115,8 @@ function canvasResize()
 	}
 	if (change)
 		invaders[0].x -= (amount + 40) ;
-	if (invaders[0].x <=0)
-		invaders[0].x = 10;
+		if (invaders[0].x <= 0)
+			invaders[0].x = 10;
 	RePositionInvaders(invaders);
 }
 
@@ -131,12 +131,13 @@ function clearScreen()
 function Draw(ctx)
 {
 	//ClearObject(spaceInvader, ctx);
-	//ClearObjects(invaders, ctx);
-	clearScreen();
-	DrawInvaders(invaders, ctx);
+	ClearObjects(invaders, ctx);
+	//clearScreen();
+	
 	//DrawObject(spaceInvader, ctx);
 	//MoveObject(spaceInvader, ctx);
-	invaders = MoveObjects(invaders, ctx);
+	MoveObjects(invaders, ctx);
+	DrawInvaders(invaders, ctx);
 }
 
 
@@ -193,7 +194,7 @@ function DrawInvaders(invaders, ctx)
 
 function ClearObjects(invaders, ctx)
 {
-	for(let i = 0; i < invaders.length; i++)
+	for(var i = 0; i < invaders.length; i++)
 	{
 		ClearObject(invaders[i], ctx);
 	}
@@ -205,7 +206,7 @@ function MoveObjects(invaders, ctx)
 	{
 		invaders[i] = MoveObject(invaders[i], ctx);
 	}
-	return(invaders);
+	//return(invaders);
 }
 
 
@@ -294,6 +295,7 @@ function MoveObject(object, ctx)
 {
 	// save old position
 	object.oldX = object.x;
+	object.oldY = object.y;
 	object.x += speed * direction;
 	return (object)
 }
@@ -302,8 +304,7 @@ function MoveObject(object, ctx)
 function ClearObject(object, ctx)
 {
 	ctx.fillStyle = background;
-	ctx.fillRect(object.oldX, object.oldY, scale * object.oldPicture[0].length , scale * object.oldPicture.length );
-	ctx.stroke();
+	ctx.fillRect(object.oldX - 1, object.oldY - 1, scale * object.oldPicture[0].length + 2, scale * object.oldPicture.length + 2 );
 }
 
 
