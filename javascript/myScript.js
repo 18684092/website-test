@@ -28,15 +28,16 @@ var spaceInvader = {
 	state : 1,
 	hit : 0,
 	oldX : 0,
-	oldY : 20,
-	scale : 2,
-	speed : 2,
-	direction : 1
+	oldY : 20
 }
 
+var direction = 1;
 var background = "blue";
 var ctx;
+var speed = 2;
 var canvas;
+var invaders = new Array(50);
+var scale = 2;
 
 window.onload = function()
 {
@@ -51,6 +52,7 @@ function init(width, height)
 	console.log('Init fired');
 	ctx = getCanvasCTX("canvas")
 	setScale();
+	invaders = MakeArrayOfInvaders(invaders);
 	var intervalDraw = setInterval(Draw, 30, ctx);
 	var intervalAnimate = setInterval(Animate, 500, ctx);
 }
@@ -62,17 +64,8 @@ function init(width, height)
 // Red do this function!!!
 function setScale()
 {
-	spaceInvader.scale = 1;
-	if (canvas.width >= 600)
-		spaceInvader.scale = 2;
-	if (canvas.width >= 1025)
-		spaceInvader.scale = 4;
-	if (canvas.width >= 1500)
-		spaceInvader.scale = 6;
-	if (canvas.width >= 2000)
-		spaceInvader.scale = 8;
-	if (canvas.width >= 3000)
-		spaceInvader.scale = 10;
+	scale = canvas.width / 300;
+	speed = scale;
 }
 
 
@@ -81,21 +74,16 @@ function uniCharCode(event)
 {
     var c = event.which || event.keyCode;
     if (c == 115)
-		spaceInvader.scale += 1;
-	if (spaceInvader.scale > 32)
+		scale += 1;
+	if (scale > 32)
 	{
 		clearScreen();
-		spaceInvader.scale = 1;
+		scale = 1;
 	}	
 	if (c == 97)
-		spaceInvader.speed += 1;
-	if (spaceInvader.speed >= 32)
-		spaceInvader.speed = 1;
-	if (c == 99)
-		if (spaceInvader.colour == "red")
-			spaceInvader.colour = "white";
-		else
-			spaceInvader.colour = "red";
+		speed += 1;
+	if (speed >= 32)
+		speed = 1;
 }
 
 // Get 2d canvas context - return ctx
@@ -114,11 +102,24 @@ function canvasResize()
 	canvas.width = window.innerWidth - 50;
 	canvas.height = window.innerHeight - 100;
 	setScale();
-	if (spaceInvader.x + spaceInvader.picture[0].length * spaceInvader.scale >= canvas.width)
+	var change = false;
+	var amount = 0;
+	for(let i = 0; i < invaders.length; i++)
 	{
-	spaceInvader.x = canvas.width - spaceInvader.picture[0].length * spaceInvader.scale - 40;
+		if (invaders[i].x + invaders[i].picture[0].length * scale >= canvas.width)
+		{
+			change = true;
+			amount = invaders[i].x + invaders[i].picture[0].length * scale - canvas.width;
+			break;
+		}
 	}
+	if (change)
+		invaders[0].x -= (amount + 40) ;
+	if (invaders[0].x <=0)
+		invaders[0].x = 10;
+	RePositionInvaders(invaders);
 }
+
 function clearScreen()
 {
 	ctx.fillStyle = background;
@@ -129,33 +130,40 @@ function clearScreen()
 // Draw stuff
 function Draw(ctx)
 {
-	ClearObject(spaceInvader, ctx);
-	DrawObject(spaceInvader, ctx);
-	MoveObject(spaceInvader, ctx);
+	//ClearObject(spaceInvader, ctx);
+	//ClearObjects(invaders, ctx);
+	clearScreen();
+	DrawInvaders(invaders, ctx);
+	//DrawObject(spaceInvader, ctx);
+	//MoveObject(spaceInvader, ctx);
+	invaders = MoveObjects(invaders, ctx);
 }
 
 
 // Animate stuff
 function Animate(ctx)
 {
-	AnimateSpaceInvader(spaceInvader, ctx);
+	AnimateSpaceInvader(invaders, ctx);
 }
 
 // Animate space invaders
 function AnimateSpaceInvader(object, ctx)
 {
 	// This is only temp, will be done purely by changing state
-	if (object.state == 1)
+	for(let i =0; i < object.length;i++)
 	{
-		object.state = 0;
-		object.picture = spaceInvaderImage0
-		object.oldPicture = spaceInvaderImage1
+	if (object[i].state == 1)
+	{
+		object[i].state = 0;
+		object[i].picture = spaceInvaderImage0
+		object[i].oldPicture = spaceInvaderImage1
 	}
 	else
 	{
-		object.state = 1;
-		object.picture = spaceInvaderImage1
-		object.oldPicture = spaceInvaderImage0
+		object[i].state = 1;
+		object[i].picture = spaceInvaderImage1
+		object[i].oldPicture = spaceInvaderImage0
+	}
 	}
 }
 
@@ -169,10 +177,116 @@ function DrawObject(object, ctx)
 		{
 			if (object.picture[j][i] == 1)
 			{
-				ctx.fillRect(object.x + i * object.scale, object.y + j * object.scale, 1 * object.scale , 1 * object.scale);
+				ctx.fillRect(object.x + i * scale, object.y + j * scale, 1 * scale , 1 * scale);
 			}
 		}
 	}
+}
+
+function DrawInvaders(invaders, ctx)
+{
+	for(let i = 0; i < invaders.length; i++)
+	{
+		DrawObject(invaders[i], ctx);
+	}
+}
+
+function ClearObjects(invaders, ctx)
+{
+	for(let i = 0; i < invaders.length; i++)
+	{
+		ClearObject(invaders[i], ctx);
+	}
+}
+function MoveObjects(invaders, ctx)
+{
+	CheckEnd(invaders);
+	for(let i = 0; i < invaders.length; i++)
+	{
+		invaders[i] = MoveObject(invaders[i], ctx);
+	}
+	return(invaders);
+}
+
+
+
+function CheckEnd(object)
+{
+	var change = false;
+	for(let i = 0; i < object.length; i++)
+	{
+		if (object[i].x + speed + object[i].picture.length * scale >= canvas.width || object[i].x <= Math.abs(speed))
+		{
+			change = true;
+		}
+	}
+	if (change)
+		direction *= -1;
+}
+
+function RePositionInvaders(invaders)
+{
+	var row = 0;
+	var column = 0;
+	var spacingH = 10;
+	var spacingV = 20;
+	// 50 of the little blighters
+	for(let i = 0; i < 50; i++)
+	{
+		invaders[i].x = (column * scale * invaders[i].picture[0].length) + (invaders[i].picture[0].length * scale) + spacingH;
+		invaders[i].y = (row    * scale * invaders[i].picture.length   ) + (invaders[i].picture.length * scale)    + spacingV;
+		column++; 
+		// New row?
+		if ((i + 1)% 10 == 0)
+		{
+			row++;
+			column = 0;
+			spacingV += 5;
+			spacingH = 0
+		}
+		spacingH += 10;
+	}
+}
+
+function MakeArrayOfInvaders(invaders)
+{
+	var row = 0;
+	var column = 0;
+	var colour = ["red", "white", "yellow", "black", "grey", "white"];
+	var spacingH = 10;
+	var spacingV = 20;
+	// 50 of the little blighters
+	for(var i = 0; i < 50; i++)
+	{
+		// add invaders
+		invaders[i] = 
+		{
+			x : 10,
+			y : 20,
+			colour : "white",
+			picture : spaceInvaderImage1,
+			oldPicture: spaceInvaderImage0,
+			state : 1,
+			hit : 0,
+			oldX : 0,
+			oldY : 20
+		};
+		invaders[i].colour = "white";//colour[row];
+		invaders[i].x = (column * scale * invaders[i].picture[0].length) + (invaders[i].picture[0].length * scale) + spacingH;
+		invaders[i].y = (row    * scale * invaders[i].picture.length   ) + (invaders[i].picture.length * scale)    + spacingV;
+		column++; 
+		// New row?
+		if ((i + 1)% 10 == 0)
+		{
+			row++;
+			column = 0;
+			spacingV += 5;
+			spacingH = 0
+		}
+		spacingH += 10;
+		
+	}
+	return (invaders);
 }
 
 // move objects, just for testing at present
@@ -180,20 +294,16 @@ function MoveObject(object, ctx)
 {
 	// save old position
 	object.oldX = object.x;
-	if (object.x + object.speed + object.picture.length * object.scale >= canvas.width || object.x <= Math.abs(object.speed))
-	{
-		object.direction *= -1;
-	}
-	object.x += object.speed * object.direction;
-	
+	object.x += speed * direction;
+	return (object)
 }
 
 // clear object
 function ClearObject(object, ctx)
 {
 	ctx.fillStyle = background;
-	ctx.fillRect(object.oldX, object.oldY, object.scale * object.oldPicture[0].length , object.scale * object.oldPicture.length );
-	ctx.stroke;
+	ctx.fillRect(object.oldX, object.oldY, scale * object.oldPicture[0].length , scale * object.oldPicture.length );
+	ctx.stroke();
 }
 
 
