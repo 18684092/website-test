@@ -89,17 +89,17 @@ function canvasResize()
 	canvas.width = window.innerWidth - 50;
 	canvas.height = window.innerHeight - 50;
 	setScale();
-
 	RePositionInvaders(invaders);
 }
 
+// Obvious
 function clearScreen()
 {
 	ctx.fillStyle = background;
 	ctx.fillRect(0,0,canvas.width, canvas.height);
 }
 
-// Draw stuff
+// Draw stuff 30 fps if possible
 function Draw(ctx)
 {
 	ClearObjects(invaders, ctx);
@@ -195,8 +195,8 @@ function RePositionInvaders(invaders)
 {
 	var row = 0;
 	var column = 0;
-	var spacingH = 10;
-	var spacingV = 20;
+	var spacingH = 10 * scale;
+	var spacingV = 20 * scale;
 	// 50 of the little blighters
 	for(let i = 0; i < 50; i++)
 	{
@@ -208,10 +208,10 @@ function RePositionInvaders(invaders)
 		{
 			row++;
 			column = 0;
-			spacingV += 5;
+			spacingV += 5 * scale;
 			spacingH = 0
 		}
-		spacingH += 10;
+		spacingH += 10 * scale;
 	}
 }
 
