@@ -19,22 +19,10 @@ var spaceInvaderImage0 = [
 					"10000001",
 					"10000001"];
 
-var spaceInvader = {
-	x : 10,
-	y : 20,
-	colour : "white",
-	picture : spaceInvaderImage1,
-	oldPicture: spaceInvaderImage0,
-	state : 1,
-	hit : 0,
-	oldX : 0,
-	oldY : 20
-}
-
 var direction = 1;
 var background = "blue";
 var ctx;
-var speed = 2;
+var speed = 1;
 var canvas;
 var invaders = new Array(50);
 var scale = 2;
@@ -65,9 +53,8 @@ function init(width, height)
 function setScale()
 {
 	scale = canvas.width / 300;
-	speed = scale;
+	speed = scale / 2;
 }
-
 
 // Code thrown together to test
 function uniCharCode(event) 
@@ -102,21 +89,7 @@ function canvasResize()
 	canvas.width = window.innerWidth - 50;
 	canvas.height = window.innerHeight - 50;
 	setScale();
-	var change = false;
-	var amount = 0;
-	for(let i = 0; i < invaders.length; i++)
-	{
-		if (invaders[i].x + invaders[i].picture[0].length * scale >= canvas.width)
-		{
-			change = true;
-			amount = invaders[i].x + invaders[i].picture[0].length * scale - canvas.width;
-			break;
-		}
-	}
-	if (change)
-		invaders[0].x -= (amount + 40) ;
-		if (invaders[0].x <= 0)
-			invaders[0].x = 10;
+
 	RePositionInvaders(invaders);
 }
 
@@ -126,20 +99,13 @@ function clearScreen()
 	ctx.fillRect(0,0,canvas.width, canvas.height);
 }
 
-
 // Draw stuff
 function Draw(ctx)
 {
-	//ClearObject(spaceInvader, ctx);
 	ClearObjects(invaders, ctx);
-	//clearScreen();
-	
-	//DrawObject(spaceInvader, ctx);
-	//MoveObject(spaceInvader, ctx);
 	MoveObjects(invaders, ctx);
 	DrawInvaders(invaders, ctx);
 }
-
 
 // Animate stuff
 function Animate(ctx)
@@ -153,18 +119,18 @@ function AnimateSpaceInvader(object, ctx)
 	// This is only temp, will be done purely by changing state
 	for(let i =0; i < object.length;i++)
 	{
-	if (object[i].state == 1)
-	{
-		object[i].state = 0;
-		object[i].picture = spaceInvaderImage0
-		object[i].oldPicture = spaceInvaderImage1
-	}
-	else
-	{
-		object[i].state = 1;
-		object[i].picture = spaceInvaderImage1
-		object[i].oldPicture = spaceInvaderImage0
-	}
+		if (object[i].state == 1)
+		{
+			object[i].state = 0;
+			object[i].picture = spaceInvaderImage0
+			object[i].oldPicture = spaceInvaderImage1
+		}
+		else
+		{
+			object[i].state = 1;
+			object[i].picture = spaceInvaderImage1
+			object[i].oldPicture = spaceInvaderImage0
+		}
 	}
 }
 
@@ -199,6 +165,7 @@ function ClearObjects(invaders, ctx)
 		ClearObject(invaders[i], ctx);
 	}
 }
+
 function MoveObjects(invaders, ctx)
 {
 	CheckEnd(invaders);
@@ -206,11 +173,9 @@ function MoveObjects(invaders, ctx)
 	{
 		invaders[i] = MoveObject(invaders[i], ctx);
 	}
-	//return(invaders);
 }
 
-
-
+// Have we hit a side
 function CheckEnd(object)
 {
 	var change = false;
@@ -225,6 +190,7 @@ function CheckEnd(object)
 		direction *= -1;
 }
 
+// Screen must have been resized
 function RePositionInvaders(invaders)
 {
 	var row = 0;
@@ -249,11 +215,11 @@ function RePositionInvaders(invaders)
 	}
 }
 
+// 
 function MakeArrayOfInvaders(invaders)
 {
 	var row = 0;
 	var column = 0;
-	var colour = ["red", "white", "yellow", "black", "grey", "white"];
 	var spacingH = 10;
 	var spacingV = 20;
 	// 50 of the little blighters
