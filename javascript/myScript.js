@@ -56,23 +56,6 @@ function setScale()
 	speed = scale / 2;
 }
 
-// Code thrown together to test
-function uniCharCode(event) 
-{
-    var c = event.which || event.keyCode;
-    if (c == 115)
-		scale += 1;
-	if (scale > 32)
-	{
-		clearScreen();
-		scale = 1;
-	}	
-	if (c == 97)
-		speed += 1;
-	if (speed >= 32)
-		speed = 1;
-}
-
 // Get 2d canvas context - return ctx
 function getCanvasCTX(id)
 {
@@ -89,7 +72,9 @@ function canvasResize()
 	canvas.width = window.innerWidth - 50;
 	canvas.height = window.innerHeight - 50;
 	setScale();
-	RePositionInvaders(invaders);
+	RePositionInvaders(invaders,0, 0);
+	
+	DrawInvaders(invaders, ctx);
 }
 
 // Obvious
@@ -187,31 +172,34 @@ function CheckEnd(object)
 		}
 	}
 	if (change)
+	{
 		direction *= -1;
+	}
 }
 
 // Screen must have been resized
-function RePositionInvaders(invaders)
+function RePositionInvaders(invaders, offsetX, offsetY)
 {
 	var row = 0;
 	var column = 0;
-	var spacingH = 10 * scale;
-	var spacingV = 20 * scale;
+	var spacingH = 0;
+	var spacingV = 0;
 	// 50 of the little blighters
 	for(let i = 0; i < 50; i++)
 	{
-		invaders[i].x = (column * scale * invaders[i].picture[0].length) + (invaders[i].picture[0].length * scale) + spacingH;
-		invaders[i].y = (row    * scale * invaders[i].picture.length   ) + (invaders[i].picture.length * scale)    + spacingV;
+		invaders[i].x = (column * scale * invaders[i].picture[0].length) + (invaders[i].picture[0].length * scale) + spacingH + offsetX;
+		invaders[i].y = (row    * scale * invaders[i].picture.length   ) + (invaders[i].picture.length * scale)    + spacingV + offsetY;
 		column++; 
+		spacingH += 10 * scale;
 		// New row?
 		if ((i + 1)% 10 == 0)
 		{
 			row++;
 			column = 0;
 			spacingV += 5 * scale;
-			spacingH = 0
+			spacingH = 0;
 		}
-		spacingH += 10 * scale;
+		
 	}
 }
 
@@ -220,37 +208,37 @@ function MakeArrayOfInvaders(invaders)
 {
 	var row = 0;
 	var column = 0;
-	var spacingH = 10;
-	var spacingV = 20;
+	var spacingH = 0;
+	var spacingV = 0;
 	// 50 of the little blighters
 	for(var i = 0; i < 50; i++)
 	{
 		// add invaders
 		invaders[i] = 
 		{
-			x : 10,
-			y : 20,
+			x : 0,
+			y : 0,
 			colour : "white",
 			picture : spaceInvaderImage1,
 			oldPicture: spaceInvaderImage0,
 			state : 1,
 			hit : 0,
 			oldX : 0,
-			oldY : 20
+			oldY : 0
 		};
 		invaders[i].colour = "white";//colour[row];
 		invaders[i].x = (column * scale * invaders[i].picture[0].length) + (invaders[i].picture[0].length * scale) + spacingH;
 		invaders[i].y = (row    * scale * invaders[i].picture.length   ) + (invaders[i].picture.length * scale)    + spacingV;
 		column++; 
+		spacingH += 10 * scale;
 		// New row?
 		if ((i + 1)% 10 == 0)
 		{
 			row++;
 			column = 0;
-			spacingV += 5;
-			spacingH = 0
+			spacingV += 5 * scale;
+			spacingH = 0;
 		}
-		spacingH += 10;
 		
 	}
 	return (invaders);
