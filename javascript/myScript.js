@@ -41,7 +41,7 @@ function init(width, height)
 	ctx = getCanvasCTX("canvas")
 	setScale();
 	invaders = MakeArrayOfInvaders(invaders);
-	var intervalDraw = setInterval(Draw, 30, ctx);
+	var intervalDraw = setInterval(Draw, 15, ctx);
 	var intervalAnimate = setInterval(Animate, 500, ctx);
 }
 
