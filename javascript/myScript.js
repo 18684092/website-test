@@ -53,9 +53,8 @@ function init(width, height)
 function setScale()
 {
 	// Scale size on width unless height is smaller, then base upon height
-	if (canvas.width >= canvas.height && canvas.width < 181)
-		scale = canvas.width / 300;
-	else
+	scale = canvas.width / 300;
+	if (canvas.width > canvas.height)
 		scale = canvas.height / 300;
 	speed = scale / 2;
 }
