@@ -56,7 +56,10 @@ function setScale()
 	scale = canvas.width / 300;
 	if (canvas.width > canvas.height)
 		scale = canvas.height / 300;
-	speed = scale / 2;
+	if (canvas.width / canvas.height > 1)
+		speed = canvas.width / canvas.height;
+	else
+		speed = scale / 2;
 }
 
 // Get 2d canvas context - return ctx
