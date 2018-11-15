@@ -52,7 +52,11 @@ function init(width, height)
 // Red do this function!!!
 function setScale()
 {
-	scale = canvas.width / 300;
+	// Scale size on width unless height is smaller, then base upon height
+	if (canvas.width >= canvas.height && canvas.width < 181)
+		scale = canvas.width / 300;
+	else
+		scale = canvas.height / 300;
 	speed = scale / 2;
 }
 
@@ -145,7 +149,7 @@ function DrawInvaders(invaders, ctx)
 
 function ClearObjects(invaders, ctx)
 {
-	for(var i = 0; i < invaders.length; i++)
+	for(let i = 0; i < invaders.length; i++)
 	{
 		ClearObject(invaders[i], ctx);
 	}
