@@ -9,6 +9,7 @@ var spaceInvaderImage1 = [
 					"00100100",
 					"00100100",
 					"11100111"];
+					
 var spaceInvaderImage0 = [	
 					"00000000",
 					"00011000",
@@ -18,6 +19,17 @@ var spaceInvaderImage0 = [
 					"01100110",
 					"10000001",
 					"10000001"];
+					
+var defenderImage0 = [	
+					"0000110000",
+					"0000110000",
+					"0000110000",
+					"0001111000",
+					"0011111100",
+					"0111111110",
+					"1111111111",
+					"1111111111",
+					"0111111110"];
 
 var direction = 1;
 var background = "blue";
@@ -26,6 +38,9 @@ var speed = 1;
 var canvas;
 var invaders = new Array(50);
 var scale = 2;
+var defender = {};
+var sound = 0;
+var edge = 20;
 
 window.onload = function()
 {
@@ -33,26 +48,65 @@ window.onload = function()
 }
 
 
+function uniCharCode(event) 
+{
+    var key = event.keyCode;
+    if (key == 122 && defender.x > edge)
+	{	
+		defender.oldX = defender.x;
+		defender.x -= 2 * scale;
+	}
+	if (key == 120 && defender.x + defender.picture[0].length * scale < canvas.width - edge)
+	{
+		defender.oldX = defender.x;
+		defender.x += 2 * scale;
+	}
+	ClearObject(defender, ctx);
+	DrawObject(defender, ctx);
+}
+
 // Interval times may need changing to request animation frame
 // 
 function init(width, height)
 {
 	console.log('Init fired');
+	var sound1 =  document.getElementById("sound1").src;
+	var sound2 =  document.getElementById("sound2").src;
 	ctx = getCanvasCTX("canvas")
 	setScale();
+	DrawBox(ctx);
 	invaders = MakeArrayOfInvaders(invaders);
+	defender = SetUpDefender();
 	var intervalDraw = setInterval(Draw, 30, ctx);
-	var intervalAnimate = setInterval(Animate, 500, ctx);
+	var intervalAnimate = setInterval(Animate, 1000, ctx);
 }
 
 ///////////////
 // Functions //
 ///////////////
 
-// Red do this function!!!
+
+function SetUpDefender()
+{
+	defender = {
+		colour : "white",
+		x : canvas.width / 2,
+		y : canvas.height - edge - (10 * scale),
+		lives : 3,
+		picture : defenderImage0,
+		oldPicture : defenderImage0,
+		state : 0,
+		hit : 0,
+		oldX : canvas.width / 2,
+		oldY : canvas.height - edge - (10 * scale)
+	};
+	return (defender);
+}
+
+// Redo this function!!!
 function setScale()
 {
-	// Scale size on width unless height is smaller, then base upon height
+	// Scale size and speed
 	scale = canvas.width / 300;
 	if (canvas.width > canvas.height)
 		scale = canvas.height / 300;
@@ -60,6 +114,11 @@ function setScale()
 		speed = canvas.width / canvas.height;
 	else
 		speed = scale / 2;
+	
+	defender.x = canvas.width / 2;
+	defender.y = canvas.height - edge - (10 * scale);
+	defender.oldY = defender.y;
+	defender.oldX = defender.x;
 }
 
 // Get 2d canvas context - return ctx
@@ -78,9 +137,10 @@ function canvasResize()
 	canvas.width = window.innerWidth - 50;
 	canvas.height = window.innerHeight - 50;
 	setScale();
-	RePositionInvaders(invaders,0, 0);
-	
+	RePositionInvaders(invaders,edge, edge);
+	DrawObject(defender, ctx);
 	DrawInvaders(invaders, ctx);
+	DrawBox(ctx);
 }
 
 // Obvious
@@ -94,13 +154,24 @@ function clearScreen()
 function Draw(ctx)
 {
 	ClearObjects(invaders, ctx);
+	ClearObject(defender, ctx);
 	MoveObjects(invaders, ctx);
 	DrawInvaders(invaders, ctx);
+	DrawObject(defender, ctx);
 }
 
 // Animate stuff
 function Animate(ctx)
 {
+	if (sound == 1) 
+	{
+		sound = 0;
+		sound1.play();
+	} else 
+	{
+		sound = 1;
+		sound2.play();
+	}
 	AnimateSpaceInvader(invaders, ctx);
 }
 
@@ -129,13 +200,14 @@ function AnimateSpaceInvader(object, ctx)
 function DrawObject(object, ctx)
 {
 	ctx.fillStyle = object.colour;
-	for(var i = 0; i < object.picture.length; i++)
+	for(let i = 0; i < object.picture.length; i++)
 	{
-		for(var j = 0; j < object.picture[i].length; j++)
+		for(let j = 0; j < object.picture[i].length; j++)
 		{
-			if (object.picture[j][i] == 1)
+			//console.log(object.picture[0][1]);
+			if (object.picture[i][j] == "1")
 			{
-				ctx.fillRect(object.x + i * scale, object.y + j * scale, 1 * scale , 1 * scale);
+				ctx.fillRect(object.x + j * scale, object.y + i * scale, 1 * scale , 1 * scale);
 			}
 		}
 	}
@@ -172,7 +244,7 @@ function CheckEnd(object)
 	var change = false;
 	for(let i = 0; i < object.length; i++)
 	{
-		if (object[i].x + speed + object[i].picture.length * scale >= canvas.width || object[i].x <= Math.abs(speed))
+		if (object[i].x + speed + object[i].picture.length * scale + edge >= canvas.width || object[i].x <= Math.abs(speed) + edge)
 		{
 			change = true;
 		}
@@ -209,9 +281,23 @@ function RePositionInvaders(invaders, offsetX, offsetY)
 	}
 }
 
+function DrawBox(ctx)
+{
+	ctx.beginPath();
+	ctx.strokeStyle = "white";
+	ctx.moveTo(edge - 5 , edge - 5);
+	ctx.lineTo(canvas.width - edge + 5, edge - 5);
+	ctx.lineTo(canvas.width - edge + 5 ,canvas.height - edge + 5);
+	ctx.lineTo(edge - 5,canvas.height - edge + 5);
+	ctx.lineTo(edge - 5, edge - 5);
+	ctx.stroke();
+}
+
 // 
 function MakeArrayOfInvaders(invaders)
 {
+	var offsetX = edge;
+	var offsetY = edge;
 	var row = 0;
 	var column = 0;
 	var spacingH = 0;
@@ -233,8 +319,10 @@ function MakeArrayOfInvaders(invaders)
 			oldY : 0
 		};
 		invaders[i].colour = "white";//colour[row];
-		invaders[i].x = (column * scale * invaders[i].picture[0].length) + (invaders[i].picture[0].length * scale) + spacingH;
-		invaders[i].y = (row    * scale * invaders[i].picture.length   ) + (invaders[i].picture.length * scale)    + spacingV;
+		invaders[i].x = (column * scale * invaders[i].picture[0].length) + (invaders[i].picture[0].length * scale) + spacingH + offsetX;
+		invaders[i].y = (row    * scale * invaders[i].picture.length   ) + (invaders[i].picture.length * scale)    + spacingV + offsetY;
+		invaders[i].oldX = invaders[i].x;
+		invaders[i].oldY = invaders[i].y;
 		column++; 
 		spacingH += 10 * scale;
 		// New row?
@@ -264,7 +352,7 @@ function MoveObject(object, ctx)
 function ClearObject(object, ctx)
 {
 	ctx.fillStyle = background;
-	ctx.fillRect(object.oldX - 1, object.oldY - 1, scale * object.oldPicture[0].length + 2, scale * object.oldPicture.length + 2 );
+	ctx.fillRect(object.oldX - 2, object.oldY -2, scale * object.oldPicture[0].length + 2, scale * object.oldPicture.length + 4 );
 }
 
 
