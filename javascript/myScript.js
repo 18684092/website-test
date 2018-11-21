@@ -267,6 +267,8 @@ function RePositionInvaders(invaders, offsetX, offsetY)
 	{
 		invaders[i].x = (column * scale * invaders[i].picture[0].length) + (invaders[i].picture[0].length * scale) + spacingH + offsetX;
 		invaders[i].y = (row    * scale * invaders[i].picture.length   ) + (invaders[i].picture.length * scale)    + spacingV + offsetY;
+		invaders[i].oldX = invaders[i].x;
+		invaders[i].oldY = invaders[i].y;
 		column++; 
 		spacingH += 10 * scale;
 		// New row?
