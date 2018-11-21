@@ -88,7 +88,7 @@ function init(width, height)
 
 function SetUpDefender()
 {
-	defender = {
+	defender = { 
 		colour : "white",
 		x : canvas.width / 2,
 		y : canvas.height - edge - (10 * scale),
