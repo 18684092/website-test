@@ -13,7 +13,7 @@ function uniCharCode(event)
     var key = event.keyCode;
 	console.log(key);
 	if (key == 65)
-		localStorage.setItem("test", "€");
+		localStorage.setItem("test", "€ sign £ $");
 	else
 		localStorage.setItem("test", "rubbish");
 	document.getElementById("p2").innerHTML = localStorage.getItem("test");
