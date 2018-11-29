@@ -12,7 +12,10 @@ function uniCharCode(event)
 {
     var key = event.keyCode;
 	console.log(key);
-	localStorage.setItem("test", "£");
+	if (key == 65)
+		localStorage.setItem("test", "£");
+	else
+		localStorage.setItem("test", "rubbish");
 	document.getElementById("p2").innerHTML = localStorage.getItem("test");
 
 }
