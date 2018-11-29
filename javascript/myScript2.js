@@ -3,6 +3,7 @@
 
 window.onload = function()
 {
+	document.getElementById("p2").innerHTML = localStorage.getItem("test");
 	init(window.innerWidth, window.innerHeight);	
 }
 
