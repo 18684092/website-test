@@ -2,6 +2,7 @@
 <html>
 	<head>
 	    <meta charset=utf-8 />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" href="css/style.css" />
 		<title>Week 7 Animation</title>
@@ -16,9 +17,11 @@
 		
 		<audio id="sound2" src="assets/14.mp3" autoplap type="audio/mpeg">
 		</audio>
-		
-		<canvas id="canvas"></canvas>
-	
+		<header id="header"></header>
+		<aside id="aside1"></aside>
+		<aside id="aside2"></aside>
+		<canvas id="canvas" onmousedown="hideCanvas(event)"></canvas>
+		<footer id="footer"></footer>
 	
 	
 	</body>

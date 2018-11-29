@@ -42,6 +42,10 @@ var defender = {};
 var sound = 0;
 var edge = 20;
 
+// jquery variables
+var hide = false;
+
+
 window.onload = function()
 {
 	init(window.innerWidth, window.innerHeight);	
@@ -101,6 +105,22 @@ function SetUpDefender()
 		oldY : canvas.height - edge - (10 * scale)
 	};
 	return (defender);
+}
+
+// hide canvas
+function hideCanvas(event) 
+{
+	if (hide)
+	{
+	canvas.height = 100;
+	hide = false;
+	}
+	else
+	{
+		canvas.height = window.innerHeight - 50;
+		hide = true;
+	}
+	//$("canvas").hide();
 }
 
 // Redo this function!!!
