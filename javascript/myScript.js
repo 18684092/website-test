@@ -107,21 +107,6 @@ function SetUpDefender()
 	return (defender);
 }
 
-// hide canvas
-function hideCanvas(event) 
-{
-	if (hide)
-	{
-	canvas.height = 100;
-	hide = false;
-	}
-	else
-	{
-		canvas.height = window.innerHeight - 50;
-		hide = true;
-	}
-	//$("canvas").hide();
-}
 
 // Redo this function!!!
 function setScale()
@@ -147,15 +132,15 @@ function getCanvasCTX(id)
 	console.log('doCanvasStuff fired');
 	canvas = document.getElementById(id);
 	var myContext = canvas.getContext('2d');
-	canvas.width = window.innerWidth - 50;
-	canvas.height = window.innerHeight - 50;
+	canvas.width = window.innerWidth - 5;
+	canvas.height = window.innerHeight - 5;
 	return (myContext);
 }
 
 function canvasResize()
 {
-	canvas.width = window.innerWidth - 50;
-	canvas.height = window.innerHeight - 50;
+	canvas.width = window.innerWidth - 5;
+	canvas.height = window.innerHeight - 5;
 	setScale();
 	RePositionInvaders(invaders,edge, edge);
 	DrawObject(defender, ctx);
