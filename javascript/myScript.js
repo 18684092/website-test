@@ -141,9 +141,10 @@ function canvasResize()
 {
 	canvas.width = window.innerWidth - 5;
 	canvas.height = window.innerHeight - 5;
+	
+	setScale();
 	var h = document.getElementById("left");
 	h.style.height = ((canvas.height - 10) * .70) +"px";
-	setScale();
 	RePositionInvaders(invaders,edge, edge);
 	DrawObject(defender, ctx);
 	DrawInvaders(invaders, ctx);

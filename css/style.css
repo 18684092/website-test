@@ -1,87 +1,96 @@
-body{
+body
+{
 	background-color: #ffffff;
 	margin: 5px;
 	padding: 0;
 	text-align: center;
 	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
- }
+	overflow: hidden;
+}
  
- .red {
-	 color: red;
- }
+.red 
+{
+	color: red;
+}
  
- #canvas {
+#canvas
+{
 	background-color: #0000ff;
 	padding:0px;
 	margin: 0px;
 	margin-top: 5px;
 	width:70%;
- }
-#canvas1 {
+}
+ 
+#canvas1
+{
 	display:block;
 	background-color: white;
 	width:100%;
 	padding:0px;
 	margin:0px;
 	margin-bottom: 0px;
-		
- }
- #header {
-display: block;
-padding:0px;
-margin:0px;
-border-style: ridge;
-background-color: blue;
-font-size: 4vw;
-color: white;
-padding-bottom: 5px;
- }
- 
- #inside {
-	 background-color: white;
-	 margin:0px;
-	 padding: 0px;
-	 margin-right: 5px;
-	 height: 100%;
- }
- 
- #footer {
-	 background-color: blue;
-		padding:0px;
-		margin:0px;
-		font-size: 1vw;
-		border-style: ridge;
-		color: white;
- }
- #left {
- display:inline;
- float:left;
- width:30%;
- margin:0px;
- padding:0px;
- margin-top: 5px;
- margin-right: 0px;
- background-color: white;
+}
 
-
- }
+#header
+{
+	display: block;
+	padding:0px;
+	margin:0px;
+	border-style: ridge;
+	background-color: blue;
+	font-size: 4vw;
+	color: white;
+	padding-bottom: 5px;
+}
  
- #aside1 {
-	 float:left-side;
+#inside
+{
+	background-color: white;
+	margin:0px;
+	padding: 0px;
+	margin-right: 5px;
+	height: 100%;
+}
+ 
+#footer
+{
+	background-color: blue;
+	padding:0px;
+	margin:0px;
+	font-size: 1vw;
+	border-style: ridge;
+	color: white;
+}
+
+#left
+{
+	display:inline;
+	float:left;
+	width:30%;
+	margin:0px;
+	padding:0px;
+	margin-top: 5px;
+	margin-right: 0px;
+	background-color: white;
+}
+ 
+#aside1
+{
+	float:left-side;
 	display:block;
-	 color: white; 
-	 background-color: blue;
-	 height: 50%;
-	 margin-bottom:5px;
- }
+	color: white; 
+	background-color: blue;
+	height: 50%;
+	margin-bottom:5px;
+}
  
-  #aside2 {
-	 float:left-side;
+#aside2
+{
+	
+	float:left-side;
 	display:block;
-  color: white;
-  background-color: blue;
-  height: 50%;
-  
-
-  
-  }
+	color: white;
+	background-color: blue;
+	height: 50%;
+}
