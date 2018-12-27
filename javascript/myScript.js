@@ -42,16 +42,10 @@ var defender = {};
 var sound = 0;
 var edge = 20;
 
-
-// jquery variables
-var hide = false;
-
-
 window.onload = function()
 {
 	init(window.innerWidth, window.innerHeight);	
 }
-
 
 function uniCharCode(event) 
 {
@@ -84,7 +78,8 @@ function init(width, height)
 	defender = SetUpDefender();
 	var intervalDraw = setInterval(Draw, 30, ctx);
 	var intervalAnimate = setInterval(Animate, 1000, ctx);
-
+	var h = document.getElementById("left");
+	h.style.height = ((canvas.height - 10) *.70 ) +"px";
 	
 }
 
@@ -127,8 +122,7 @@ function setScale()
 	defender.y = canvas.height - edge - (10 * scale);
 	defender.oldY = defender.y;
 	defender.oldX = defender.x;
-	var h = document.getElementById("left");
-	h.style.height = (canvas.height ) *.70 - 7  +"px";
+	
 }
 
 // Get 2d canvas context - return ctx
@@ -138,7 +132,8 @@ function getCanvasCTX(id)
 	canvas = document.getElementById(id);
 	var myContext = canvas.getContext('2d');
 	canvas.width = window.innerWidth - 5;
-	canvas.height = window.innerHeight - 5;
+	canvas.height = window.innerHeight - 5 ;
+	
 	return (myContext);
 }
 
@@ -146,6 +141,8 @@ function canvasResize()
 {
 	canvas.width = window.innerWidth - 5;
 	canvas.height = window.innerHeight - 5;
+	var h = document.getElementById("left");
+	h.style.height = ((canvas.height - 10) * .70) +"px";
 	setScale();
 	RePositionInvaders(invaders,edge, edge);
 	DrawObject(defender, ctx);

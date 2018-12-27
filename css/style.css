@@ -4,10 +4,7 @@ body{
 	padding: 0;
 	text-align: center;
 	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
-    overflow-x:hidden;
-
  }
- 
  
  .red {
 	 color: red;
@@ -15,36 +12,29 @@ body{
  
  #canvas {
 	background-color: #0000ff;
-	
 	padding:0px;
 	margin: 0px;
 	margin-top: 5px;
 	width:70%;
-	height:400%
-	
-
  }
 #canvas1 {
 	display:block;
 	background-color: white;
-
 	width:100%;
 	padding:0px;
 	margin:0px;
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 		
  }
  #header {
-	 display: block;
-		padding:0px;
-		margin:0px;
-		border-style: ridge;
-	 background-color: blue;
-	 font-size: 4vw;
-	 color: white;
-	 margin-bottom: 5px;
-	 padding-bottom: 5px;
-	 
+display: block;
+padding:0px;
+margin:0px;
+border-style: ridge;
+background-color: blue;
+font-size: 4vw;
+color: white;
+padding-bottom: 5px;
  }
  
  #inside {
@@ -72,7 +62,7 @@ body{
  margin-top: 5px;
  margin-right: 0px;
  background-color: white;
- height: 0px;
+
 
  }
  
@@ -82,6 +72,7 @@ body{
 	 color: white; 
 	 background-color: blue;
 	 height: 50%;
+	 margin-bottom:5px;
  }
  
   #aside2 {
@@ -90,7 +81,7 @@ body{
   color: white;
   background-color: blue;
   height: 50%;
-  margin-top:5px;
+  
 
   
   }
