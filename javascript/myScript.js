@@ -42,6 +42,7 @@ var defender = {};
 var sound = 0;
 var edge = 20;
 
+
 // jquery variables
 var hide = false;
 
@@ -83,6 +84,8 @@ function init(width, height)
 	defender = SetUpDefender();
 	var intervalDraw = setInterval(Draw, 30, ctx);
 	var intervalAnimate = setInterval(Animate, 1000, ctx);
+
+	
 }
 
 ///////////////
@@ -124,6 +127,8 @@ function setScale()
 	defender.y = canvas.height - edge - (10 * scale);
 	defender.oldY = defender.y;
 	defender.oldX = defender.x;
+	var h = document.getElementById("left");
+	h.style.height = (canvas.height ) *.70 - 7  +"px";
 }
 
 // Get 2d canvas context - return ctx
@@ -362,25 +367,4 @@ function ClearObject(object, ctx)
 	ctx.fillRect(object.oldX - 2, object.oldY -2, scale * object.oldPicture[0].length + 2, scale * object.oldPicture.length + 4 );
 }
 
-
-// Future functions, might not need
-
-
-// Converts Degrees to Radians
-function degreesToRadians(x)
-{
-	return (x * (Math.PI / 180));
-}
-
-// Wait for x number of mS
-function wait(ms)
-{
-	console.log('waited');
-	var d = new Date();
-	var d2 = null;
-	do 
-	{
-		d2 = new Date();
-	} while(d2 - d < ms);
-}
 

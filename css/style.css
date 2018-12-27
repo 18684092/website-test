@@ -20,6 +20,7 @@ body{
 	margin: 0px;
 	margin-top: 5px;
 	width:70%;
+	height:400%
 	
 
  }
@@ -47,7 +48,7 @@ body{
  }
  
  #inside {
-	 background-color: blue;
+	 background-color: white;
 	 margin:0px;
 	 padding: 0px;
 	 margin-right: 5px;
@@ -71,25 +72,25 @@ body{
  margin-top: 5px;
  margin-right: 0px;
  background-color: white;
- height: 300px;
+ height: 0px;
 
  }
  
  #aside1 {
 	 float:left-side;
 	display:block;
-	 height: 200px;
-	 color: white;
-
-	 
-	 
+	 color: white; 
+	 background-color: blue;
+	 height: 50%;
  }
  
   #aside2 {
 	 float:left-side;
 	display:block;
-	height: 200px;
   color: white;
+  background-color: blue;
+  height: 50%;
+  margin-top:5px;
 
   
   }
