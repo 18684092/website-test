@@ -93,8 +93,12 @@ body
 #modifyinvaderlink
 {
 	cursor:pointer;
-	
 }
+#soundToggle
+{
+	cursor:pointer;
+}
+
 /* Bottom left info box */
 #aside2
 {

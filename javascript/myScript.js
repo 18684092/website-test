@@ -42,12 +42,30 @@ var defender = {};
 var sound = 0;
 var edge = 20;
 var gridToggle = false;
+var soundTog = false;
+
+
 
 window.onload = function()
 {
 	init(window.innerWidth, window.innerHeight);	
 }
 
+// Menu item
+function soundToggle()
+{
+	var soundControl = document.getElementById('soundToggle');
+	if (soundTog)
+	{
+		soundTog = false;
+		soundControl.innerHTML="Game Sound (OFF)";
+	} else 
+	{
+		soundTog = true;
+		soundControl.innerHTML="Game Sound (<span class=\"red\">ON</span>)";
+	}
+} 
+//Menu item
 function addHTMCSSGrid()
 {	
 	var HTML = "";
@@ -73,7 +91,6 @@ function addHTMCSSGrid()
 		}
 	}
 	grid.innerHTML = HTML;
-	console.log(HTML);
 }
 
 function uniCharCode(event) 
@@ -200,14 +217,17 @@ function Draw(ctx)
 // Animate stuff
 function Animate(ctx)
 {
-	if (sound == 1) 
+	if (soundTog)
 	{
-		sound = 0;
-		sound1.play();
-	} else 
-	{
-		sound = 1;
-		sound2.play();
+		if (sound == 1) 
+		{
+			sound = 0;
+			sound1.play();
+		} else 
+		{
+			sound = 1;
+			sound2.play();
+		}
 	}
 	AnimateSpaceInvader(invaders, ctx);
 }
