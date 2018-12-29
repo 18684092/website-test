@@ -47,6 +47,25 @@ window.onload = function()
 	init(window.innerWidth, window.innerHeight);	
 }
 
+function addHTMCSSGrid()
+{	var HTML = "";
+var myColour = "white";
+	var grid = document.getElementById('grid-container');
+	var linkControl = document.getElementById('modifyinvaderlink');
+	linkControl.innerHTML="Modify Invader (<span class=\"red\">ON</span>)";
+	grid.style.display = "inline-grid";
+	for (var i = 0; i < spaceInvaderImage0.length; i++)
+	{
+		for (var j = 0; j < spaceInvaderImage0[0].length; j++)
+		{
+			if (spaceInvaderImage0[i][j] == '1') myColour = "white"; else myColour = "blue";
+			HTML += " <div class=\"grid-item\" id=\"imageBit"+ i + "-" + j +"\" style=\"background-color:" + myColour + "\">&nbsp;</div>\n";
+		}
+	}
+	grid.innerHTML = HTML;
+	console.log(HTML);
+}
+
 function uniCharCode(event) 
 {
     var key = event.keyCode;
@@ -79,7 +98,7 @@ function init(width, height)
 	var intervalDraw = setInterval(Draw, 30, ctx);
 	var intervalAnimate = setInterval(Animate, 1000, ctx);
 	var h = document.getElementById("left");
-	h.style.height = ((canvas.height - 10) *.70 ) +"px";
+	h.style.height = ((canvas.height - 15) *.80 ) +"px";
 	
 }
 
@@ -144,7 +163,7 @@ function canvasResize()
 	
 	setScale();
 	var h = document.getElementById("left");
-	h.style.height = ((canvas.height - 10) * .70) +"px";
+	h.style.height = ((canvas.height - 15) * .80) +"px";
 	RePositionInvaders(invaders,edge, edge);
 	DrawObject(defender, ctx);
 	DrawInvaders(invaders, ctx);

@@ -7,21 +7,21 @@ body
 	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
 	overflow: hidden;
 }
- 
+ /* Class for changing colour */
 .red 
 {
 	color: red;
 }
- 
+/* This is the main drawing Canvas */
 #canvas
 {
 	background-color: #0000ff;
 	padding:0px;
 	margin: 0px;
 	margin-top: 5px;
-	width:70%;
+	width:80%;
 }
- 
+/* This is the positioning div for the canvas */
 #canvas1
 {
 	display:block;
@@ -31,7 +31,7 @@ body
 	margin:0px;
 	margin-bottom: 0px;
 }
-
+/* Top bar of page */
 #header
 {
 	display: block;
@@ -43,7 +43,7 @@ body
 	color: white;
 	padding-bottom: 5px;
 }
- 
+/* Left hand side of page positioning */
 #inside
 {
 	background-color: white;
@@ -51,8 +51,10 @@ body
 	padding: 0px;
 	margin-right: 5px;
 	height: 100%;
+	font-size: 1vw;
+	color:white;
 }
- 
+/* The bottom info panel */
 #footer
 {
 	background-color: blue;
@@ -61,36 +63,77 @@ body
 	font-size: 1vw;
 	border-style: ridge;
 	color: white;
+	height:100%;
 }
-
+/* Container for left hand side of page */
 #left
 {
 	display:inline;
 	float:left;
-	width:30%;
+	width:20%;
 	margin:0px;
 	padding:0px;
 	margin-top: 5px;
 	margin-right: 0px;
 	background-color: white;
+	color:white;
 }
- 
+/* Top left info box */
 #aside1
 {
 	float:left-side;
 	display:block;
 	color: white; 
 	background-color: blue;
-	height: 50%;
+	height: 30%;
 	margin-bottom:5px;
 }
- 
+
+#modifyinvaderlink
+{
+	cursor:pointer;
+	
+}
+/* Bottom left info box */
 #aside2
 {
-	
-	float:left-side;
+	text-align:center-right;
+	color:white;
 	display:block;
-	color: white;
+	padding-top:5px;
 	background-color: blue;
-	height: 50%;
+	height: 70%;
+}
+/********************/
+/* CONTENT ELEMENTS */
+/********************/
+
+/* Grid to hold space invader */
+#grid-container
+{
+
+	text-align:center;
+	border: 1px solid white;
+	grid-template-rows: auto;
+	width:50%;
+	display: none;
+	grid-template-columns: auto auto auto auto auto auto auto auto;
+	background-color: blue;
+	padding: 2px;
+	padding-bottom:0px;
+	margin:0px;
+	margin-left:5px;
+}
+/* Each element within grid */
+.grid-item {
+	text-align:center;
+	/* equal width and height give a square! DOH! */
+	width:75%;
+	height:75%;
+	background-color: blue;
+	border: 1px solid white;
+	padding: 0px;
+	margin: 0px;
+	margin-left:1px;
+	font-size: 1vw;
 }
