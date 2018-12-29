@@ -41,6 +41,7 @@ var scale = 2;
 var defender = {};
 var sound = 0;
 var edge = 20;
+var gridToggle = false;
 
 window.onload = function()
 {
@@ -48,10 +49,19 @@ window.onload = function()
 }
 
 function addHTMCSSGrid()
-{	var HTML = "";
-var myColour = "white";
+{	
+	var HTML = "";
+	var myColour = "white";
 	var grid = document.getElementById('grid-container');
 	var linkControl = document.getElementById('modifyinvaderlink');
+	if (gridToggle)
+	{
+		linkControl.innerHTML="Modify Invader (OFF)";
+		grid.style.display = "none";
+		gridToggle = false;
+		return;
+	}
+	gridToggle = true;
 	linkControl.innerHTML="Modify Invader (<span class=\"red\">ON</span>)";
 	grid.style.display = "inline-grid";
 	for (var i = 0; i < spaceInvaderImage0.length; i++)
