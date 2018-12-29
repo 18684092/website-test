@@ -112,6 +112,8 @@ body
 /* Grid to hold space invader */
 #grid-container
 {
+	position:relative;
+	top: 2vh;
 	grid-gap:10 px;
 	text-align:center;
 	border: 0px solid white;

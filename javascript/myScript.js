@@ -143,9 +143,9 @@ function setScale()
 	if (canvas.width > canvas.height)
 		scale = canvas.height / 300;
 	if (canvas.width / canvas.height > 1)
-		speed = canvas.width / canvas.height;
+		speed = (canvas.width / canvas.height);
 	else
-		speed = scale / 2;
+		speed = (scale / 2);
 	
 	defender.x = canvas.width / 2;
 	defender.y = canvas.height - edge - (10 * scale);
