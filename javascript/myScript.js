@@ -90,15 +90,19 @@ function addHTMCSSGrid()
 	gridToggle = true;
 	linkControl.innerHTML="Modify Invader (<span class=\"red\">ON</span>)";
 	grid.style.display = "inline-grid";
+	// Test each bit
 	for (var i = 0; i < grid0.length; i++)
 	{
 		for (var j = 0; j < grid0[0].length; j++)
 		{
+			// for future handle any colour rather than just white
 			if (grid0[i][j] == '1' || (grid0[i][j] != "blue" && grid0[i][j] != "" && grid0[i][j] != "0")) myColour = "white"; else myColour = "blue";
 			HTML += " <div onclick=\"changeGrid(this.id)\" class=\"grid-item\" id=\"imageBit"+ i + "-" + j +"\" style=\"background-color:" + myColour + "\">&nbsp;</div>\n";
 		}
 	}
+	// Write the code
 	grid.innerHTML = HTML;
+	// Save after EVERY change
 	saveAllVariables();
 }
 
