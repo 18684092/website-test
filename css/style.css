@@ -21,6 +21,34 @@ body
 	margin-top: 5px;
 	width:80%;
 }
+
+#invaderText
+{
+
+}
+#canvas2
+{
+	float:left;
+	display:inline;
+	background-color: blue;
+	padding:0px;
+	margin: 4px;
+	width:32px;
+	height:32px;
+	border: 1px solid white;
+}
+#canvas3
+{
+	float:left;
+	border: 1px solid white;
+	display:inline;
+	top:0px;
+	background-color: blue;
+	padding:0px;
+	margin: 4px;
+	width:32px;
+	height:32px;
+}
 /* This is the positioning div for the canvas */
 #canvas1
 {
@@ -121,8 +149,7 @@ body
 #grid-container
 {
 	position:relative;
-	top: 2vh;
-	grid-gap:10 px;
+	margin:4px;
 	text-align:center;
 	border: 0px solid white;
 	grid-template-rows: auto;
