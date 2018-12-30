@@ -94,7 +94,7 @@ function addHTMCSSGrid()
 	{
 		for (var j = 0; j < grid0[0].length; j++)
 		{
-			if (grid0[i][j] == '1' || (grid0[i][j] != "blue" && grid0[i][j].length > 0)) myColour = "white"; else myColour = "blue";
+			if (grid0[i][j] == '1' || (grid0[i][j] != "blue" && grid0[i][j] != "" && grid0[i][j] != "0")) myColour = "white"; else myColour = "blue";
 			HTML += " <div onclick=\"changeGrid(this.id)\" class=\"grid-item\" id=\"imageBit"+ i + "-" + j +"\" style=\"background-color:" + myColour + "\">&nbsp;</div>\n";
 		}
 	}
