@@ -1,5 +1,6 @@
 // Global vars
 
+// Default images
 var spaceInvaderImage1 = [	
 					"10000001",
 					"01011010",
@@ -45,13 +46,15 @@ var gridToggle = false;
 var soundTog = false;
 
 
-
+// Hold off until fully loaded...
+// It all starts here !!!
 window.onload = function()
 {
 	init(window.innerWidth, window.innerHeight);	
 }
 
 // Menu item
+// Toggles sound on or off and changes menu entry
 function soundToggle()
 {
 	var soundControl = document.getElementById('soundToggle');
@@ -64,12 +67,17 @@ function soundToggle()
 		soundTog = true;
 		soundControl.innerHTML="Game Sound (<span class=\"red\">ON</span>)";
 	}
+	saveAllVariables();
 } 
+
 //Menu item
+// Draws grid by inserting HTML and changing menu links
 function addHTMCSSGrid()
-{	
+{	var grid0 = JSON.parse(localStorage.getItem("grid0"));
+	if (grid0 == null) { grid0 = spaceInvaderImage0; }
 	var HTML = "";
 	var myColour = "white";
+	// These "getElements" need to be here and not global
 	var grid = document.getElementById('grid-container');
 	var linkControl = document.getElementById('modifyinvaderlink');
 	if (gridToggle)
@@ -82,17 +90,54 @@ function addHTMCSSGrid()
 	gridToggle = true;
 	linkControl.innerHTML="Modify Invader (<span class=\"red\">ON</span>)";
 	grid.style.display = "inline-grid";
-	for (var i = 0; i < spaceInvaderImage0.length; i++)
+	for (var i = 0; i < grid0.length; i++)
 	{
-		for (var j = 0; j < spaceInvaderImage0[0].length; j++)
+		for (var j = 0; j < grid0[0].length; j++)
 		{
-			if (spaceInvaderImage0[i][j] == '1') myColour = "white"; else myColour = "blue";
-			HTML += " <div class=\"grid-item\" id=\"imageBit"+ i + "-" + j +"\" style=\"background-color:" + myColour + "\">&nbsp;</div>\n";
+			if (grid0[i][j] == '1' || (grid0[i][j] != "blue" && grid0[i][j].length > 0)) myColour = "white"; else myColour = "blue";
+			HTML += " <div onclick=\"changeGrid(this.id)\" class=\"grid-item\" id=\"imageBit"+ i + "-" + j +"\" style=\"background-color:" + myColour + "\">&nbsp;</div>\n";
 		}
 	}
 	grid.innerHTML = HTML;
+	saveAllVariables();
 }
 
+// Save variables locally
+function saveAllVariables()
+{
+	localStorage.setItem("sound", soundTog);
+	localStorage.setItem("gridtoggle", gridToggle);
+	localStorage.setItem("invaderimage0", JSON.stringify(spaceInvaderImage0));
+	localStorage.setItem("invaderimage1", JSON.stringify(spaceInvaderImage1));
+	var grid0 = new Array(8);
+	// make grid array
+	for (var y =0; y < 8; y++)
+	{
+		grid0[y] = new Array(8);
+		for (var x = 0; x < 8; x++)
+		{
+			var gridID = document.getElementById('imageBit'+y+'-'+x);
+			grid0[y][x] = gridID.style.backgroundColor;
+		}
+	}
+	localStorage.setItem("grid0", JSON.stringify(grid0));
+}
+
+// change invader grid
+function changeGrid(elementID)
+{
+	var gridElement = document.getElementById(elementID);
+	if (gridElement.style.backgroundColor != "blue")
+	{
+		gridElement.style.backgroundColor = "blue";
+	} else
+	{
+		gridElement.style.backgroundColor = "white";
+	}
+	saveAllVariables();
+}
+
+// Handles key presses
 function uniCharCode(event) 
 {
     var key = event.keyCode;

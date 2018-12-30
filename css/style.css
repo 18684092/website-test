@@ -90,14 +90,18 @@ body
 	font-size:1.5vw;
 }
 
-#modifyinvaderlink
+/* Change mouse pointer when hover over these */
+#modifyinvaderlink:hover
 {
 	cursor:pointer;
+	text-shadow: 2px 2px #ff0000;
 }
-#soundToggle
+#soundToggle:hover
 {
 	cursor:pointer;
+	text-shadow: 2px 2px #ff0000;
 }
+
 
 /* Bottom left info box */
 #aside2
@@ -139,4 +143,5 @@ body
 	padding: 0px;
 	margin: 0px;
 	font-size: 1vw;
+	cursor:pointer;
 }
