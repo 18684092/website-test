@@ -551,18 +551,53 @@ function ClearObject(object, ctx)
 	ctx.fillRect(object.oldX - 2, object.oldY -2, scale * object.oldPicture[0].length + 2, scale * object.oldPicture.length + 4 );
 }
 
-
-// Drag and drop stuff
+/////////////////////////
+// Drag and drop stuff //
+/////////////////////////
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
+// On drag grab the ID
 function drag(ev) {
   ev.dataTransfer.setData("src", ev.srcElement.id);
 }
 
+// on Drop retieve the src ID
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("src");
-  console.log(data);
+  // data now holds the source (canvas2 or 3)
+  // Get local data for grid 0 or 1 and convert then save to invaderimage0 or 1
+  if (data ==  "canvas2")
+  {
+  	var grid = JSON.parse(localStorage.getItem("grid0"));
+  } else
+  {
+	var grid = JSON.parse(localStorage.getItem("grid1"));
+  }
+  // convert grid to invaderimage
+  var pic = new Array(8);
+  for (var y = 0; y < grid.length; y++)
+  {
+	var str = "";
+	for (var x = 0; x < grid[y].length; x++)
+	{
+	if (data == "canvas2")
+		{
+			if (grid[y][x] != "blue" && grid[y][x] != 0) str += "1"; else str += "0";
+		} else
+		{
+			if (grid[y][x] != "blue" && grid[y][x] != 0) str += "1"; else str += "0";  
+		}
+	}
+	pic[y] = str;
+  }
+  if (data == "canvas2") spaceInvaderImage0 = pic; else spaceInvaderImage1 = pic;
+  for(var i = 0; i < 50; i++)
+	{
+		// add invaders
+		invaders[i].oldPicture = spaceInvaderImage0;
+		invaders[i].picture = spaceInvaderImage1;
+	}
 }
