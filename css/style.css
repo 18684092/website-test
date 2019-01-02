@@ -26,22 +26,28 @@ body
 {
 
 }
+/* Mini invader (optional display) */
+#canvas2:hover, #canvas3:hover
+{
+	cursor:pointer;
+}
 #canvas2
 {
 	float:left;
-	display:inline;
+	display:none;
 	background-color: blue;
 	padding:0px;
 	margin: 4px;
 	width:32px;
 	height:32px;
-	border: 1px solid white;
+	border: 1px solid red;
 }
+/* Mini invader (optional display) */
 #canvas3
 {
 	float:left;
 	border: 1px solid white;
-	display:inline;
+	display:none;
 	top:0px;
 	background-color: blue;
 	padding:0px;
@@ -119,13 +125,7 @@ body
 }
 
 /* Change mouse pointer when hover over these */
-#modifyinvaderlink:hover
-{
-	cursor:pointer;
-	text-shadow: 2px 2px #ff0000;
-}
-#soundToggle:hover
-{
+.menu:hover {
 	cursor:pointer;
 	text-shadow: 2px 2px #ff0000;
 }

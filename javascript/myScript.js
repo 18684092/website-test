@@ -38,12 +38,14 @@ var ctx;
 var speed = 1;
 var canvas;
 var invaders = new Array(50);
-var scale = 2;
+var scale ;
 var defender = {};
 var sound = 0;
 var edge = 20;
 var gridToggle = false;
+var grid01Toggle = "grid0";
 var soundTog = false;
+var score = 100;
 
 
 // Hold off until fully loaded...
@@ -70,40 +72,114 @@ function soundToggle()
 	saveAllVariables();
 } 
 
+
+function WhichGrid(id)
+{
+	if (id == "canvas2") 
+	{
+		var g = document.getElementById('canvas2').style.borderColor="red";
+		var g = document.getElementById('canvas3').style.borderColor="white";
+		grid01Toggle = "grid0";
+	}
+	else
+	{
+		var g = document.getElementById('canvas2').style.borderColor="white";
+		var g = document.getElementById('canvas3').style.borderColor="red";
+		grid01Toggle = "grid1";
+	}
+	addHTMCSSGrid();
+}
 //Menu item
 // Draws grid by inserting HTML and changing menu links
-function addHTMCSSGrid()
-{	var grid0 = JSON.parse(localStorage.getItem("grid0"));
+function addHTMCSSGrid(Where)
+{	
+	var canvas2 = document.getElementById('canvas2');
+	var ctx2 = canvas2.getContext('2d');
+	var canvas3 = document.getElementById('canvas3');
+	var ctx3 = canvas3.getContext('2d');
+	var grid0 = JSON.parse(localStorage.getItem("grid0"));
 	if (grid0 == null) { grid0 = spaceInvaderImage0; }
+	var grid1 = JSON.parse(localStorage.getItem("grid1"));
+	if (grid1 == null) { grid1 = spaceInvaderImage1; }
 	var HTML = "";
 	var myColour = "white";
 	// These "getElements" need to be here and not global
 	var grid = document.getElementById('grid-container');
 	var linkControl = document.getElementById('modifyinvaderlink');
-	if (gridToggle)
+	var mini2 = document.getElementById('canvas2');
+	var mini3 = document.getElementById('canvas3');
+
+	if (gridToggle && Where == 0)
 	{
 		linkControl.innerHTML="Modify Invader (OFF)";
 		grid.style.display = "none";
+		mini2.style.display = "none";
+		mini3.style.display = "none";
 		gridToggle = false;
 		return;
 	}
 	gridToggle = true;
+	mini2.style.display = "inline";
+	mini3.style.display = "inline";
 	linkControl.innerHTML="Modify Invader (<span class=\"red\">ON</span>)";
 	grid.style.display = "inline-grid";
-	// Test each bit
-	for (var i = 0; i < grid0.length; i++)
+	// Which invader image?
+	if (grid01Toggle == "grid0")
 	{
-		for (var j = 0; j < grid0[0].length; j++)
+		var gridDisplay = grid0;
+	} else
+	{
+		var gridDisplay = grid1;
+	}
+	// Test each bit
+	for (var i = 0; i < gridDisplay.length; i++)
+	{
+		for (var j = 0; j < gridDisplay[0].length; j++)
 		{
 			// for future handle any colour rather than just white
-			if (grid0[i][j] == '1' || (grid0[i][j] != "blue" && grid0[i][j] != "" && grid0[i][j] != "0")) myColour = "white"; else myColour = "blue";
+			if (gridDisplay[i][j] == '1' || (gridDisplay[i][j] != "blue" && gridDisplay[i][j] != "" && gridDisplay[i][j] != "0")) myColour = "white"; else myColour = "blue";
 			HTML += " <div onclick=\"changeGrid(this.id)\" class=\"grid-item\" id=\"imageBit"+ i + "-" + j +"\" style=\"background-color:" + myColour + "\">&nbsp;</div>\n";
 		}
 	}
 	// Write the code
 	grid.innerHTML = HTML;
+	// Draw mini invaders
+	DrawMiniInvaders(ctx2, ctx3, grid0, grid0);
 	// Save after EVERY change
 	saveAllVariables();
+}
+
+// Draw mini invaders in mini canvases
+function DrawMiniInvaders(ctx2, ctx3, grid0, grid1)
+{
+	var canvas2 = document.getElementById('canvas2');
+	var ctx2 = canvas2.getContext('2d');
+	var canvas3 = document.getElementById('canvas3');
+	var ctx3 = canvas3.getContext('2d');
+	var grid0 = JSON.parse(localStorage.getItem("grid0"));
+	if (grid0 == null) { grid0 = spaceInvaderImage0; }
+	var grid1 = JSON.parse(localStorage.getItem("grid1"));
+	if (grid1 == null) { grid1 = spaceInvaderImage1;}
+	DrawGrid(grid0, ctx2);
+	DrawGrid(grid1, ctx3);
+}
+
+// Draw the grid
+function DrawGrid(grid, c)
+{
+	c.fillStyle = "blue";
+	c.fillRect(0,0, 36 * 8, 20 * 8);
+	for(let i = 0; i < grid.length; i++)
+	{
+		for(let j = 0; j < grid[i].length; j++)
+		{
+			if (grid[i][j] != "blue" && grid[i][j] != 0)
+			{
+				if (grid[i][j] == 1) c.fillStyle = "white"; else c.fillStyle = grid[i][j];
+				c.fillRect(16 + j * 32, 8 + i * 16 , 32 , 16 );
+			}
+		}
+	}	
 }
 
 // Save variables locally
@@ -113,18 +189,19 @@ function saveAllVariables()
 	localStorage.setItem("gridtoggle", gridToggle);
 	localStorage.setItem("invaderimage0", JSON.stringify(spaceInvaderImage0));
 	localStorage.setItem("invaderimage1", JSON.stringify(spaceInvaderImage1));
-	var grid0 = new Array(8);
+	var gridDisplay = new Array(8);
 	// make grid array
 	for (var y =0; y < 8; y++)
 	{
-		grid0[y] = new Array(8);
+		gridDisplay[y] = new Array(8);
 		for (var x = 0; x < 8; x++)
 		{
 			var gridID = document.getElementById('imageBit'+y+'-'+x);
-			grid0[y][x] = gridID.style.backgroundColor;
+			gridDisplay[y][x] = gridID.style.backgroundColor;
 		}
 	}
-	localStorage.setItem("grid0", JSON.stringify(grid0));
+	if (grid01Toggle == "grid0") gridV = "grid0"; else gridV = "grid1";
+	localStorage.setItem(gridV, JSON.stringify(gridDisplay));
 }
 
 // change invader grid
@@ -139,6 +216,8 @@ function changeGrid(elementID)
 		gridElement.style.backgroundColor = "white";
 	}
 	saveAllVariables();
+	// Draw mini invaders
+	DrawMiniInvaders();
 }
 
 // Handles key presses
@@ -223,12 +302,10 @@ function setScale()
 // Get 2d canvas context - return ctx
 function getCanvasCTX(id)
 {
-	console.log('doCanvasStuff fired');
 	canvas = document.getElementById(id);
 	var myContext = canvas.getContext('2d');
 	canvas.width = window.innerWidth - 5;
 	canvas.height = window.innerHeight - 5 ;
-	
 	return (myContext);
 }
 
@@ -244,6 +321,7 @@ function canvasResize()
 	DrawObject(defender, ctx);
 	DrawInvaders(invaders, ctx);
 	DrawBox(ctx);
+	DrawText(ctx);
 }
 
 // Obvious
@@ -261,6 +339,15 @@ function Draw(ctx)
 	MoveObjects(invaders, ctx);
 	DrawInvaders(invaders, ctx);
 	DrawObject(defender, ctx);
+	DrawText(ctx);
+}
+
+// Score
+function DrawText(ctx)
+{
+	ctx.textAlign = "center";
+	ctx.font = "20px Arial";
+	ctx.fillText("Score: " + score, canvas.width/2, 35);
 }
 
 // Animate stuff
@@ -364,6 +451,7 @@ function CheckEnd(object)
 // Screen must have been resized
 function RePositionInvaders(invaders, offsetX, offsetY)
 {
+	offsetY = edge + 30;
 	var row = 0;
 	var column = 0;
 	var spacingH = 0;
@@ -405,7 +493,7 @@ function DrawBox(ctx)
 function MakeArrayOfInvaders(invaders)
 {
 	var offsetX = edge;
-	var offsetY = edge;
+	var offsetY = edge +30;
 	var row = 0;
 	var column = 0;
 	var spacingH = 0;
@@ -464,3 +552,17 @@ function ClearObject(object, ctx)
 }
 
 
+// Drag and drop stuff
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("src", ev.srcElement.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("src");
+  console.log(data);
+}
