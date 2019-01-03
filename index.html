@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="gb">
 	<head>
 		<!-- force a known char set -->
 	    <meta charset=utf-8 />
@@ -13,10 +13,10 @@
 		<script src="javascript/myScript.js"></script>
 	</head>
 	<!-- General JS function listeners applied to body --> 
-	<body onkeypress="uniCharCode(event)" onresize="canvasResize()" allow="autoplay">
+	<body onkeypress="uniCharCode(event)" onresize="canvasResize()">
 		<!-- These are the game sounds -->
-		<audio id="sound1" src="assets/15.mp3" autoplay type="audio/mpeg"></audio>
-		<audio id="sound2" src="assets/14.mp3" autoplay type="audio/mpeg"></audio>
+		<audio id="sound1" src="assets/15.mp3"></audio>
+		<audio id="sound2" src="assets/14.mp3"></audio>
 		<!-- Top bar -->
 		<header>
 			<div id="header"><u>My Customizable Space Invaders!</u></div>
@@ -35,7 +35,7 @@
 					<span id="resetToggle" class="menu" onclick="resetToggle()">Reset Game (OFF)</span>
 				</span>
 				<!-- Content inside bottom left box -->
-				<span id="aside2" >
+				<div id="aside2" >
 					<!-- Optional content -->
 					<div id="invaderMod">
 						<h2>Invader Modification</h2>
@@ -52,7 +52,7 @@
 						<b><u>Drag n Drop:</u></b> Click and hold one of the small images of your invader and then drag it over to the main game window. Release to drop.
 						<br/><b><u>Controls:</u></b> Uses the touch screen areas at the bottoms of the screen, or use<br/><b><u>keys:</u></b><br/> <span class="red">[z]</span> - left<br/> <span class="red">[x]</span> - right<br/> <span class="red">[space]</span> - fire.<br/></p>
 					</div>
-				</span>
+				</div>
 			</div>
 		</div>
 		<!-- Main Screen - Space invaders - Container to position -->
@@ -62,8 +62,8 @@
 		</div>
 		<!-- Bottom page box, general footer type info -->
 		<footer id="footer"><b>Name: </b>Andy Perrett (PER18684092) <span class="red">::</span> <b>Module: </b>CMP1032M-1819 <span class="red">::</span> <b>Date: </b>27th December 2018</footer>
-		<div id="leftBTN" ontouchstart="buttonOn(122)" ontouchend="buttonOff()"><span class="white">Left</span></div>
-		<div id="rightBTN" ontouchstart="buttonOn(120)" ontouchend="buttonOff()"><span class="white">Right</span></div>
-		<div id="fireBTN" ontouchstart="buttonON(32)" ontouchend="buttonOff()"><span class="white">Fire</span></div>
+		<span id="leftBTN" ontouchstart="buttonOn(122)" ontouchend="buttonOff()"><span class="white">Left</span></span>
+		<span id="rightBTN" ontouchstart="buttonOn(120)" ontouchend="buttonOff()"><span class="white">Right</span></span>
+		<span id="fireBTN" ontouchstart="buttonON(32)" ontouchend="buttonOff()"><span class="white">Fire</span></span>
 		</body>
 </html>

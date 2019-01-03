@@ -135,7 +135,7 @@ body
 .menu:hover {
 	cursor:pointer;
 	text-shadow: 2px 2px #ff0000;
-	animation: menu 0.25s;
+	animation: menu 0.5s;
 }
 @keyframes menu {
     from {
