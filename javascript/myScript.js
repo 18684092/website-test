@@ -257,6 +257,22 @@ function uniCharCode(event)
 	DrawObject(defender, ctx);
 }
 
+function button(key) 
+{
+    if (key == 122 && defender.x > edge)
+	{	
+		defender.oldX = defender.x;
+		defender.x -= 2 * scale;
+	}
+	if (key == 120 && defender.x + defender.picture[0].length * scale < canvas.width - edge)
+	{
+		defender.oldX = defender.x;
+		defender.x += 2 * scale;
+	}
+	ClearObject(defender, ctx);
+	DrawObject(defender, ctx);
+}
+
 // Interval times may need changing to request animation frame
 // 
 function init(width, height)
