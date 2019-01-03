@@ -229,6 +229,8 @@ p
 /* Control Buttons */
 /* Located at bottom of screen */
 #fireBTN {
+	-webkit-touch-callout: none; 
+	-webkit-user-select: none;
 	cursor:pointer;
 	text-align:center;
     background-color: green;
@@ -243,6 +245,8 @@ p
 	opacity:0.6;
 }
 #leftBTN {
+	-webkit-touch-callout: none; 
+	-webkit-user-select: none;
 	cursor:pointer;
 	text-align:center;
     background-color: green;
@@ -257,6 +261,8 @@ p
 	opacity:0.6;
 }
 #rightBTN {
+	-webkit-touch-callout: none; 
+	-webkit-user-select: none;
 	cursor:pointer;
 	text-align:center;
     background-color: green;
