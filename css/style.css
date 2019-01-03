@@ -216,7 +216,10 @@ p
 	cursor:pointer;
 }
 
-.circle-div {
+
+/* Control Buttons */
+/* Located at bottom of screen */
+#fireBTN {
 	cursor:pointer;
 	text-align:center;
     background-color: green;
@@ -228,5 +231,33 @@ p
     position: fixed;
     bottom: 10px;
     right: 10px;
+	opacity:0.4;
+}
+#leftBTN {
+	cursor:pointer;
+	text-align:center;
+    background-color: green;
+	font-size:20px;
+    height: 40px;
+    width: 100px;
+	padding-top:15px;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+	opacity:0.4;
+}
+#rightBTN {
+	cursor:pointer;
+	text-align:center;
+    background-color: green;
+	font-size:20px;
+    height: 40px;
+    width: 100px;
+	padding-top:15px;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 10px;
+    left: 120px;
 	opacity:0.4;
 }
