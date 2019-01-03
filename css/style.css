@@ -229,8 +229,10 @@ p
 /* Control Buttons */
 /* Located at bottom of screen */
 #fireBTN {
-	-webkit-touch-callout: none; 
-	-webkit-user-select: none;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
 	cursor:pointer;
 	text-align:center;
     background-color: green;
@@ -245,8 +247,10 @@ p
 	opacity:0.6;
 }
 #leftBTN {
-	-webkit-touch-callout: none; 
-	-webkit-user-select: none;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
 	cursor:pointer;
 	text-align:center;
     background-color: green;
@@ -261,8 +265,10 @@ p
 	opacity:0.6;
 }
 #rightBTN {
-	-webkit-touch-callout: none; 
-	-webkit-user-select: none;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
 	cursor:pointer;
 	text-align:center;
     background-color: green;
