@@ -289,9 +289,7 @@ function buttonOn(key)
 
 function buttonOff()
 {
-	clearInterval(moveLeft);
-	clearInterval(moveRight);
-	clearInterval(fire);
+	clearInterval(move);
 }
 
 // Interval times may need changing to request animation frame
