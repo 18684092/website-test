@@ -15,7 +15,7 @@ body
 /* This is the main drawing Canvas */
 #canvas
 {
-	background-color: #0000ff;
+	background-color: blue;
 	padding:0px;
 	margin: 0px;
 	margin-top: 5px;
@@ -33,8 +33,8 @@ body
 }
 #canvas2
 {
-	float:left;
-	display:none;
+	display:inline;
+	float: left;
 	background-color: blue;
 	padding:0px;
 	margin: 4px;
@@ -45,9 +45,9 @@ body
 /* Mini invader (optional display) */
 #canvas3
 {
+	display:inline;
 	float:left;
 	border: 1px solid white;
-	display:none;
 	top:0px;
 	background-color: blue;
 	padding:0px;
@@ -91,13 +91,15 @@ body
 /* The bottom info panel */
 #footer
 {
+	display:block;
 	background-color: blue;
 	padding:0px;
 	margin:0px;
+	margin-top:0px;
 	font-size: 1vw;
 	border-style: ridge;
 	color: white;
-	height:100%;
+	
 }
 /* Container for left hand side of page */
 #left
@@ -122,6 +124,7 @@ body
 	height: 30%;
 	margin-bottom:5px;
 	font-size:1.5vw;
+	overflow: auto;
 }
 
 /* Change mouse pointer when hover over these */
@@ -134,27 +137,63 @@ body
 /* Bottom left info box */
 #aside2
 {
-	text-align:center-right;
+	text-align:center;
 	color:white;
 	display:block;
 	padding-top:5px;
 	background-color: blue;
 	height: 70%;
+	overflow: auto;
 }
 /********************/
 /* CONTENT ELEMENTS */
 /********************/
 
+h2
+{
+	text-size: 1vw;
+	margin:0px;
+	padding:0px;
+}
+p
+{
+	text-size: 1vw;
+	margin:0px;
+	padding:0px;
+}
+
+#instructions
+{
+	border: 0px solid white;
+	text-align:center;
+	display:none;
+	background-color: blue;
+	padding:0px;
+	margin: 5px;
+	margin-top:0px;
+}
+
+#invaderMod
+{
+	display:none;
+	border: 0px solid white;
+	padding:0px;
+	margin: 5px;
+	margin-left:0px;
+	padding-left:1vw;
+	margin-top:0px;
+}
+
 /* Grid to hold space invader */
 #grid-container
 {
-	position:relative;
+	display: inline-grid;
+	float:left;
+	padding:0px;
 	margin:4px;
-	text-align:center;
 	border: 0px solid white;
 	grid-template-rows: auto;
 	width:50%;
-	display: none;
 	grid-template-columns: auto auto auto auto auto auto auto auto;
 	background-color: blue;
 	

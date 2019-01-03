@@ -44,6 +44,7 @@ var sound = 0;
 var edge = 20;
 var gridToggle = false;
 var grid01Toggle = "grid0";
+var instructionsTog = false;
 var soundTog = false;
 var score = 100;
 
@@ -72,6 +73,22 @@ function soundToggle()
 	saveAllVariables();
 } 
 
+function instructionsToggle()
+{
+	var instructions = document.getElementById('instructionsToggle');
+	if (instructionsTog)
+	{
+		instructionsTog = false;
+		instructions.innerHTML="Instructions (OFF)";
+		document.getElementById('instructions').style.display="none";
+	} else 
+	{
+		instructionsTog = true;
+		instructions.innerHTML="Instructions (<span class=\"red\">ON</span>)";
+		document.getElementById('instructions').style.display="block";
+	}
+	saveAllVariables();	
+}
 
 function WhichGrid(id)
 {
@@ -116,9 +133,11 @@ function addHTMCSSGrid(Where)
 		mini2.style.display = "none";
 		mini3.style.display = "none";
 		gridToggle = false;
+		var invaderMod = document.getElementById('invaderMod').style.display="none";
 		return;
 	}
 	gridToggle = true;
+	var invaderMod = document.getElementById('invaderMod').style.display="block";
 	mini2.style.display = "inline";
 	mini3.style.display = "inline";
 	linkControl.innerHTML="Modify Invader (<span class=\"red\">ON</span>)";
@@ -279,7 +298,6 @@ function SetUpDefender()
 	return (defender);
 }
 
-
 // Redo this function!!!
 function setScale()
 {
@@ -291,12 +309,10 @@ function setScale()
 		speed = (canvas.width / canvas.height);
 	else
 		speed = (scale / 2);
-	
 	defender.x = canvas.width / 2;
 	defender.y = canvas.height - edge - (10 * scale);
 	defender.oldY = defender.y;
 	defender.oldX = defender.x;
-	
 }
 
 // Get 2d canvas context - return ctx
@@ -313,7 +329,6 @@ function canvasResize()
 {
 	canvas.width = window.innerWidth - 5;
 	canvas.height = window.innerHeight - 5;
-	
 	setScale();
 	var h = document.getElementById("left");
 	h.style.height = ((canvas.height - 15) * .80) +"px";
@@ -564,7 +579,8 @@ function drag(ev) {
 }
 
 // on Drop retieve the src ID
-function drop(ev) {
+function drop(ev)
+{
   ev.preventDefault();
   var data = ev.dataTransfer.getData("src");
   // data now holds the source (canvas2 or 3)
