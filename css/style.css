@@ -135,8 +135,17 @@ body
 .menu:hover {
 	cursor:pointer;
 	text-shadow: 2px 2px #ff0000;
+	animation: menu 0.25s;
 }
+@keyframes menu {
+    from {
+    margin-right: 20%;
+  }
 
+  to {
+    margin-left: 00%;
+  }
+}
 
 /* Bottom left info box */
 #aside2
@@ -231,7 +240,7 @@ p
     position: fixed;
     bottom: 10px;
     right: 10px;
-	opacity:0.4;
+	opacity:0.6;
 }
 #leftBTN {
 	cursor:pointer;
@@ -245,7 +254,7 @@ p
     position: fixed;
     bottom: 10px;
     left: 10px;
-	opacity:0.4;
+	opacity:0.6;
 }
 #rightBTN {
 	cursor:pointer;
@@ -259,5 +268,5 @@ p
     position: fixed;
     bottom: 10px;
     left: 120px;
-	opacity:0.4;
+	opacity:0.6;
 }
