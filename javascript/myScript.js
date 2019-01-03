@@ -47,6 +47,7 @@ var grid01Toggle = "grid0";
 var instructionsTog = false;
 var soundTog = false;
 var score = 100;
+var move;
 
 
 // Hold off until fully loaded...
@@ -257,20 +258,40 @@ function uniCharCode(event)
 	DrawObject(defender, ctx);
 }
 
-function button(key) 
+function moveLeft()
 {
-    if (key == 122 && defender.x > edge)
+	if (defender.x > edge)
 	{	
 		defender.oldX = defender.x;
 		defender.x -= 2 * scale;
+		ClearObject(defender, ctx);
+		DrawObject(defender, ctx);
 	}
-	if (key == 120 && defender.x + defender.picture[0].length * scale < canvas.width - edge)
+}
+
+function moveRight()
+{
+		if (defender.x + defender.picture[0].length * scale < canvas.width - edge)
 	{
 		defender.oldX = defender.x;
 		defender.x += 2 * scale;
+		ClearObject(defender, ctx);
+		DrawObject(defender, ctx);
 	}
-	ClearObject(defender, ctx);
-	DrawObject(defender, ctx);
+}
+
+function buttonOn(key) 
+{
+    if (key == 122) move = setInterval(moveLeft, 30);
+	if (key == 120) move = setInterval(moveRight, 30);
+	if (key == 32) move = setInterval(fire, 30);
+}
+
+function buttonOff()
+{
+	clearInterval(moveLeft);
+	clearInterval(moveRight);
+	clearInterval(fire);
 }
 
 // Interval times may need changing to request animation frame
