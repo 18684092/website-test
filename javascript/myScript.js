@@ -282,9 +282,21 @@ function moveRight()
 
 function buttonOn(key) 
 {
-    if (key == 122) move = setInterval(moveLeft, 300);
-	if (key == 120) move = setInterval(moveRight, 300);
-	if (key == 32) move = setInterval(fire, 300);
+    if (key == 122)
+	{
+		clearInterval(move);
+		move = setInterval(moveLeft, 300);
+	}
+	if (key == 120) 
+	{
+		clearInterval(move);
+		move = setInterval(moveRight, 300);
+	}
+	if (key == 32) 
+		{
+		clearInterval(move);
+		move = setInterval(fire, 300);
+		}
 }
 
 function buttonOff()
