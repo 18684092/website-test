@@ -1,11 +1,14 @@
 body
 {
+	position:absolute;
 	background-color: #ffffff;
 	margin: 5px;
 	padding: 0;
 	text-align: center;
 	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
 	overflow: hidden;
+	left:0px;
+	top:0px;
 }
  /* Class for changing colour */
 .red 
@@ -245,6 +248,7 @@ p
     bottom: 10px;
     right: 10px;
 	opacity:0.6;
+	z-index:1;
 }
 #leftBTN {
 	-webkit-user-select: none;  /* Chrome all / Safari all */
@@ -263,6 +267,7 @@ p
     bottom: 10px;
     left: 10px;
 	opacity:0.6;
+	z-index:1;
 }
 #rightBTN {
 	-webkit-user-select: none;  /* Chrome all / Safari all */
@@ -281,4 +286,22 @@ p
     bottom: 10px;
     left: 120px;
 	opacity:0.6;
+	z-index:1;
+}
+.floatB:hover
+{
+	z-index:1;
+}
+#vd1:hover{
+	z-index: 99;
+}
+#vd1
+{
+	
+	position: fixed;
+	padding:0px;
+	margin: 0px;
+	object-fit:fill;
+	z-index:2;
+	opacity: 0.8;
 }

@@ -58,12 +58,15 @@
 		<!-- Main Screen - Space invaders - Container to position -->
 		<div id="canvas1">
 			<!-- The main content all drawn by JS --> 
-			<canvas id="canvas" ondrop="drop(event)" ondragover="allowDrop(event)"></canvas>			
+			<canvas id="canvas" ondrop="drop(event)" ondragover="allowDrop(event)" ondataavailable="getpos(this)"></canvas>	
 		</div>
 		<!-- Bottom page box, general footer type info -->
 		<footer id="footer"><b>Name: </b>Andy Perrett (PER18684092) <span class="red">::</span> <b>Module: </b>CMP1032M-1819 <span class="red">::</span> <b>Date: </b>27th December 2018</footer>
-		<span id="leftBTN" ontouchstart="buttonOn(122)" ontouchend="buttonOff()"><span class="white">Left</span></span>
-		<span id="rightBTN" ontouchstart="buttonOn(120)" ontouchend="buttonOff()"><span class="white">Right</span></span>
-		<span id="fireBTN" ontouchstart="buttonON(32)" ontouchend="buttonOff()"><span class="white">Fire</span></span>
+		<span class="floatB" id="leftBTN" ontouchstart="buttonOn(122)" onclick="buttonOn(122)" ontouchend="buttonOff()"><span class="white">Left</span></span>
+		<span class="floatB" id="rightBTN" ontouchstart="buttonOn(120)" onclick="buttonOn(120)" ontouchend="buttonOff()"><span class="white">Right</span></span>
+		<span class="floatB" id="fireBTN" ontouchstart="buttonON(32)" onclick="buttonOn(32)" ontouchend="buttonOff()"><span class="white">Fire</span></span>
+		<!-- Videos, hidden until needed -->
+		<video class="video" id="vd1" controls src="http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv"></video>			
+
 		</body>
 </html>

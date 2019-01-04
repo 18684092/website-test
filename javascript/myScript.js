@@ -184,7 +184,7 @@ function DrawMiniInvaders(ctx2, ctx3, grid0, grid1)
 	DrawGrid(grid1, ctx3);
 }
 
-// Draw the grid
+// Draw the grid which could come from grid or image array
 function DrawGrid(grid, c)
 {
 	c.fillStyle = "blue";
@@ -240,7 +240,11 @@ function changeGrid(elementID)
 	DrawMiniInvaders();
 }
 
-// Handles key presses
+////////////
+// INPUTS //
+////////////
+
+// Handles key presses and defender keyboard movement
 function uniCharCode(event) 
 {
     var key = event.keyCode;
@@ -258,6 +262,7 @@ function uniCharCode(event)
 	DrawObject(defender, ctx);
 }
 
+// Move the defender left
 function moveLeft()
 {
 	if (defender.x > edge)
@@ -269,6 +274,7 @@ function moveLeft()
 	}
 }
 
+// Move the defender right
 function moveRight()
 {
 		if (defender.x + defender.picture[0].length * scale < canvas.width - edge)
@@ -280,6 +286,7 @@ function moveRight()
 	}
 }
 
+// Simulate a key press, for touch screens
 function buttonOn(key) 
 {
     if (key == 122)
@@ -299,17 +306,21 @@ function buttonOn(key)
 		}
 }
 
+// Defender fires, temporary
 function fire()
 {
 	clearInterval(move);	
 }
+
+// Not sure this fires on all browsers
+// Basically ontouchend()
 function buttonOff()
 {
 	clearInterval(move);
 }
 
 // Interval times may need changing to request animation frame
-// 
+// Sets everything up but setInterval vars need to be global!!!
 function init(width, height)
 {
 	console.log('Init fired');
@@ -324,14 +335,42 @@ function init(width, height)
 	var intervalAnimate = setInterval(Animate, 1000, ctx);
 	var h = document.getElementById("left");
 	h.style.height = ((canvas.height - 15) *.80 ) +"px";
-	
+
+	//forceOnClick("canvas");
+	forceDataAvailable("canvas");
 }
 
+// Add event listener 
+function forceDataAvailable(element)
+{
+	// Add an event listener
+	document.addEventListener("dataavailable", getpos(document.getElementById("canvas")));
+	let e = document.getElementById(element);
+	e.dispatchEvent(new Event("dataavailable"));
+}
+
+// Force OnClkick event on element
+function forceOnClick(element)
+{
+	let e = document.getElementById(element);
+	e.dispatchEvent(new Event("click"));
+}
+
+function getpos(e)
+{
+	var vd1 = document.getElementById("vd1");
+	var rect = e.getBoundingClientRect();
+	vd1.style.top = rect.top +"px";
+	vd1.style.left = rect.left+"px";
+	vd1.style.width = rect.width+"px";
+	vd1.style.height = rect.height+"px";
+	vd1.style.zIndex = 99;
+}
 ///////////////
 // Functions //
 ///////////////
 
-
+// Defender object has these properties
 function SetUpDefender()
 {
 	defender = { 
@@ -349,7 +388,7 @@ function SetUpDefender()
 	return (defender);
 }
 
-// Redo this function!!!
+// Redo this function!!! It works our scale....badly
 function setScale()
 {
 	// Scale size and speed
@@ -376,6 +415,7 @@ function getCanvasCTX(id)
 	return (myContext);
 }
 
+// OnResize rescale and redraw
 function canvasResize()
 {
 	canvas.width = window.innerWidth - 5;
@@ -388,6 +428,7 @@ function canvasResize()
 	DrawInvaders(invaders, ctx);
 	DrawBox(ctx);
 	DrawText(ctx);
+	forceDataAvailable("canvas");
 }
 
 // Obvious
@@ -408,7 +449,7 @@ function Draw(ctx)
 	DrawText(ctx);
 }
 
-// Score
+// Score - canvas text doesn't scale so build own font
 function DrawText(ctx)
 {
 	ctx.textAlign = "center";
@@ -416,7 +457,7 @@ function DrawText(ctx)
 	ctx.fillText("Score: " + score, canvas.width/2, 35);
 }
 
-// Animate stuff
+// Animate stuff and synchronise sound
 function Animate(ctx)
 {
 	if (soundTog)
@@ -434,7 +475,7 @@ function Animate(ctx)
 	AnimateSpaceInvader(invaders, ctx);
 }
 
-// Animate space invaders
+// Animate space invaders switch between 2 images called by setInterval
 function AnimateSpaceInvader(object, ctx)
 {
 	// This is only temp, will be done purely by changing state
@@ -466,12 +507,15 @@ function DrawObject(object, ctx)
 			//console.log(object.picture[0][1]);
 			if (object.picture[i][j] == "1")
 			{
+				// It scales depending on canvas size
 				ctx.fillRect(object.x + j * scale, object.y + i * scale, 1 * scale , 1 * scale);
 			}
 		}
 	}
 }
 
+
+// Draw each object one at a time
 function DrawInvaders(invaders, ctx)
 {
 	for(let i = 0; i < invaders.length; i++)
@@ -480,6 +524,7 @@ function DrawInvaders(invaders, ctx)
 	}
 }
 
+// Clear each object one at a time
 function ClearObjects(invaders, ctx)
 {
 	for(let i = 0; i < invaders.length; i++)
@@ -488,6 +533,8 @@ function ClearObjects(invaders, ctx)
 	}
 }
 
+
+// Move each object one at a time
 function MoveObjects(invaders, ctx)
 {
 	CheckEnd(invaders);
@@ -539,10 +586,10 @@ function RePositionInvaders(invaders, offsetX, offsetY)
 			spacingV += 5 * scale;
 			spacingH = 0;
 		}
-		
 	}
 }
 
+// Internal border box
 function DrawBox(ctx)
 {
 	ctx.beginPath();
